@@ -14,5 +14,12 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
+		initOnClick();
+	}
+	
+	private void initOnClick() {
+		binding.btnLogin.setOnClickListener(v -> {
+			// TODO: login button...
+		});
 	}
 }
