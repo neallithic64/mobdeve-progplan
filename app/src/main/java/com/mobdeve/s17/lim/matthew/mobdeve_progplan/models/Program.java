@@ -1,4 +1,4 @@
-package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
+package com.mobdeve.s17.lim.matthew.mobdeve_progplan.models;
 
 import java.util.ArrayList;
 import java.util.Date;
