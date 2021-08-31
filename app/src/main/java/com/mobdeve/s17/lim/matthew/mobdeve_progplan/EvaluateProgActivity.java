@@ -15,6 +15,7 @@ public class EvaluateProgActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		binding = ActivityEvaluateProgBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
+		initOnClick();
 	}
 
 	private void initOnClick(){
