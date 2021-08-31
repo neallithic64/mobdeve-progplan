@@ -2,6 +2,7 @@ package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
 
@@ -24,10 +25,15 @@ public class UpdateProgActivity extends AppCompatActivity {
 //    TODO: Set up Onclick Listeners
     private void initOnCLick(){
         binding.btnUpdateCancel.setOnClickListener(v->{
-
+         Intent gotoViewIndivProg = new Intent(UpdateProgActivity.this,ViewIndivProgActivity.class);
+         startActivity(gotoViewIndivProg);
+         finish();
         });
         binding.btnUpdateSave.setOnClickListener(v->{
-
+//        TODO: Save update of progressitems to database
+            Intent gotoViewIndivProg = new Intent(UpdateProgActivity.this,ViewIndivProgActivity.class);
+            startActivity(gotoViewIndivProg);
+            finish();
         });
     }
 }

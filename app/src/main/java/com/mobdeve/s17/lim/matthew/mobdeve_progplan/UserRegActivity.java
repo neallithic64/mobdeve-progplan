@@ -1,5 +1,6 @@
 package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 
@@ -28,7 +29,13 @@ public class UserRegActivity extends AppCompatActivity{
 
     private void initOnClick(){
         binding.btnRegisternewuser.setOnClickListener(v->{
-        //TODO: Create Register New User function
+//      TODO : Validate input and add to database
+
+            Intent gotoMain = new Intent(UserRegActivity.this, MainActivity.class);
+
+
+            startActivity(gotoMain);
+            finish();
         });
     }
 }

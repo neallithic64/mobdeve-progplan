@@ -2,6 +2,7 @@ package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -35,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
 	private void initOnClick() {
 		binding.btnLogin.setOnClickListener(v -> {
 			// TODO: login button...
+			// TODO : user rationale (withdb)
+
+			Intent gotoViewProgs = new Intent(MainActivity.this, ViewProgsActivity.class);
+			startActivity(gotoViewProgs);
+			finish();
+		});
+
+		binding.btnRegister.setOnClickListener( v ->{
+			Intent gotoUserReg = new Intent(MainActivity.this,UserRegActivity.class);
+			startActivity(gotoUserReg);
 		});
 	}
 
