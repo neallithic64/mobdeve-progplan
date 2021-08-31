@@ -18,6 +18,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public class APIClient {
 	public static final String BASE_URL = "https://covid-progplan.herokuapp.com/";
@@ -48,10 +49,19 @@ public class APIClient {
 		@POST("/api/progp/adminreg")
 		Call<ResponseBody> postAdminReg(@Body Admin admin);
 
-		@GET("/group/{id}/users")
-		Call<List<User>> groupList(int groupId, String query);
+		@GET("/api/progp/progadd")
+		Call<ResponseBody> postCreateProgram(@Body Program program);
+
+		/* Template for query paths
+			@GET("/group/{id}/users")
+			Call<List<User>> groupList(@Path("id") int groupId, String query);
+		*/
 	}
 
+	/* This is NOT to be called anywhere in the application. This is only a template to
+		use as a guide on how to write functions with RetroFit. Do not invoke this, this
+		will not do anything useful!
+	 */
 	public void callGetTest() {
 		Call<ResponseBody> call = APIservice.getTest();
 		call.enqueue(new Callback<ResponseBody>() {
@@ -63,7 +73,6 @@ public class APIClient {
 					Log.e("callGetTest", e.getMessage());
 				}
 			}
-
 			@Override
 			public void onFailure(Call<ResponseBody> call, Throwable t) {
 				Log.e("callGetTest", t.getMessage());

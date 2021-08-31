@@ -7,9 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityMainBinding;
-import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.APIClient;
-import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Admin;
-import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(binding.getRoot());
 		initOnClick();
 		apiClient = new APIClient();
-		// getProgs();
+		getPrograms();
 		postAdminReg("sent@from.android", "SENT_WITH_ANDROID", "YAY");
 	}
 	
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 		});
 	}
 
-	private void getProgs() {
+	private void getPrograms() {
 		Call<List<Program>> call = apiClient.APIservice.getPrograms();
 		call.enqueue(new Callback<List<Program>>() {
 			@Override
@@ -65,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
 				try {
 					if (response.body() == null)
 						Toast.makeText(MainActivity.this, response.body().string(), Toast.LENGTH_LONG).show();
-					else Toast.makeText(MainActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
+					else
+						Toast.makeText(MainActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
 				} catch (IOException e) {
 					Log.e("failedPostAddAdmin", e.getMessage());
 				}
@@ -75,5 +74,9 @@ public class MainActivity extends AppCompatActivity {
 				Log.e("failedPostAddAdmin", t.getMessage());
 			}
 		});
+	}
+
+	private void postCreateProgram() {
+		// Program newProg = new Program();
 	}
 }
