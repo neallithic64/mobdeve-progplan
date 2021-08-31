@@ -2,6 +2,7 @@ package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -60,10 +61,16 @@ public class CreateProgActivity extends AppCompatActivity {
 
 		binding.btnCreateSave.setOnClickListener(v -> {
 			// TODO: create HTTP request to server
+			Intent gotoViewProgs = new Intent(CreateProgActivity.this,ViewProgsActivity.class );
+			startActivity(gotoViewProgs);
+			finish();
 		});
 
 		binding.btnCreateCancel.setOnClickListener(v -> {
 			// TODO: go back to page
+			Intent gotoViewProgs = new Intent(CreateProgActivity.this, ViewProgsActivity.class);
+			startActivity(gotoViewProgs);
+			finish();
 		});
 	}
 }
