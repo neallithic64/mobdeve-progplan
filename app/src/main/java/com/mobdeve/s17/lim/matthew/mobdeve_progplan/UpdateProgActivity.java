@@ -16,7 +16,7 @@ public class UpdateProgActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityUpdateProgBinding.inflate(getLayoutInflater());
-        setContentView(R.layout.activity_update_prog);
+        setContentView(binding.getRoot());
 //      TODO : Set up program progress item recycler adapter
 
         initOnCLick();
