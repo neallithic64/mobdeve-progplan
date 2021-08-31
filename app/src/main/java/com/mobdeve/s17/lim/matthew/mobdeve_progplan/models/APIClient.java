@@ -15,7 +15,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public class APIClient {
 	public static final String BASE_URL = "https://covid-progplan.herokuapp.com/";
@@ -42,6 +44,12 @@ public class APIClient {
 
 		@GET("/api/progp/progs")
 		Call<List<Program>> getPrograms();
+
+		@POST("/api/progp/adminreg")
+		Call<ResponseBody> postAdminReg(@Body Admin admin);
+
+		@GET("/group/{id}/users")
+		Call<List<User>> groupList(int groupId, String query);
 	}
 
 	public void callGetTest() {
