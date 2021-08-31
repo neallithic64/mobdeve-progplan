@@ -19,6 +19,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class APIClient {
 	public static final String BASE_URL = "https://covid-progplan.herokuapp.com/";
@@ -52,10 +53,9 @@ public class APIClient {
 		@GET("/api/progp/progadd")
 		Call<ResponseBody> postCreateProgram(@Body Program program);
 
-		/* Template for query paths
-			@GET("/group/{id}/users")
-			Call<List<User>> groupList(@Path("id") int groupId, String query);
-		*/
+		/* Template for query paths */
+		@GET("/group/users")
+		Call<List<User>> groupList(@Query("id") int groupId, String query);
 	}
 
 	/* This is NOT to be called anywhere in the application. This is only a template to

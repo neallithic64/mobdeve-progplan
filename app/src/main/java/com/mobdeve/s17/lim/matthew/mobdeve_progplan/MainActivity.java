@@ -55,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
 				String msg = "";
-				for (int i = 0; i < response.body().size(); i++) msg += response.body().get(i).getProgramId() + " ";
+				for (int i = 0; i < response.body().size(); i++)
+					msg += response.body().get(i).getProgramId() + " ";
 				Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
 			}
 			@Override
@@ -72,10 +73,9 @@ public class MainActivity extends AppCompatActivity {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 				try {
-					if (response.body() == null)
+					if (response.body() != null)
 						Toast.makeText(MainActivity.this, response.body().string(), Toast.LENGTH_LONG).show();
-					else
-						Toast.makeText(MainActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
+					else Toast.makeText(MainActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
 				} catch (IOException e) {
 					Log.e("failedPostAddAdmin", e.getMessage());
 				}
