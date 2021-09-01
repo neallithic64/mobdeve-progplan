@@ -22,14 +22,17 @@ public class ViewIndivProgActivity extends AppCompatActivity {
         binding.btnEdit.setOnClickListener(v->{
             Intent gotoEditProg = new Intent(ViewIndivProgActivity.this,EditProgActivity.class);
             startActivity(gotoEditProg);
+            finish();
         });
         binding.btnUpdate.setOnClickListener(v->{
             Intent gotoUpdateProg = new Intent(ViewIndivProgActivity.this,UpdateProgActivity.class);
             startActivity(gotoUpdateProg);
+            finish();
         });
         binding.btnEvaluate.setOnClickListener(v->{
             Intent gotoEvaluateProg = new Intent(ViewIndivProgActivity.this,EvaluateProgActivity.class);
             startActivity(gotoEvaluateProg);
+            finish();
         });
     }
 }

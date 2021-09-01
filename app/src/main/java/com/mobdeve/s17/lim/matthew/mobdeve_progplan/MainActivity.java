@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 		initOnClick();
 		apiClient = new APIClient();
 		getPrograms();
-		postAdminReg("sent@from.android", "SENT_WITH_ANDROID", "YAY");
+//		postAdminReg("sent@from.android", "SENT_WITH_ANDROID", "YAY");
 	}
 	
 	private void initOnClick() {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 			public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
 				String msg = "";
 				for (int i = 0; i < response.body().size(); i++)
-					msg += response.body().get(i).getProgramId() + " ";
+					msg += response.body().get(i).getProgramId() + "\n";
 				Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
 			}
 			@Override
