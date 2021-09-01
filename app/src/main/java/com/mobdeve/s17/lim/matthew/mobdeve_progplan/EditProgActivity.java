@@ -12,38 +12,38 @@ import java.util.Calendar;
 
 public class EditProgActivity extends AppCompatActivity {
 
-    private ActivityEditProgBinding binding;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityEditProgBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-        initOnClick();
-    }
+	private ActivityEditProgBinding binding;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		binding = ActivityEditProgBinding.inflate(getLayoutInflater());
+		setContentView(binding.getRoot());
+		initOnClick();
+	}
 
-/*  TODO: Set up Onclick Listeners
-    DatePicker Dialog is currently not opening
+	/*  TODO: Set up Onclick Listeners
+		DatePicker Dialog is currently not opening
 
-* */
-    private void initOnClick(){
+	* */
+	private void initOnClick(){
        /* binding.etDateRange1.setOnClickListener( v-> {
             DatePicker mDatePickerDialogFragment;
             mDatePickerDialogFragment = new com.mobdeve.s17.lim.matthew.mobdeve_progplan.DatePicker();
             mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
         });*/
-        binding.btnEditCancel.setOnClickListener( v -> {
-            Intent gotoViewIndivProg = new Intent(EditProgActivity.this, ViewIndivProgActivity.class);
-            startActivity(gotoViewIndivProg);
-            finish();
-        });
+		binding.btnEditCancel.setOnClickListener( v -> {
+			Intent gotoViewIndivProg = new Intent(EditProgActivity.this, ViewIndivProgActivity.class);
+			startActivity(gotoViewIndivProg);
+			finish();
+		});
 
-        binding.btnEditSave.setOnClickListener( v -> {
+		binding.btnEditSave.setOnClickListener( v -> {
 //      TODO : Save changes to database
-            Intent gotoViewIndivProg = new Intent(EditProgActivity.this, ViewIndivProgActivity.class);
-            startActivity(gotoViewIndivProg);
-            finish();
-        });
-    }
+			Intent gotoViewIndivProg = new Intent(EditProgActivity.this, ViewIndivProgActivity.class);
+			startActivity(gotoViewIndivProg);
+			finish();
+		});
+	}
 
     /*public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         Calendar mCalendar = Calendar.getInstance();

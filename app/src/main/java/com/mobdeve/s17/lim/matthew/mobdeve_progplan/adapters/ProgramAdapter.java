@@ -11,27 +11,27 @@ import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
 import java.util.ArrayList;
 
 public class ProgramAdapter extends RecyclerView.Adapter {
-    private ArrayList<Program> programArrayList;
-    private Context context;
-    private int position;
+	private ArrayList<Program> programArrayList;
+	private Context context;
+	private int position;
 
-    public ProgramAdapter(ArrayList<Program> programArrayList, Context context) {
-        this.programArrayList = programArrayList;
-        this.context = context;
-    }
+	public ProgramAdapter(ArrayList<Program> programArrayList, Context context) {
+		this.programArrayList = programArrayList;
+		this.context = context;
+	}
 
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
-        return null;
-    }
+	@Override
+	public RecyclerView.ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
+		return null;
+	}
 
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+	@Override
+	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-    }
+	}
 
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
+	@Override
+	public int getItemCount() {
+		return 0;
+	}
 }

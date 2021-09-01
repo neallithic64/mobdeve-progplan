@@ -1,112 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".EditProgActivity"
-    android:layout_margin="10dp">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".EditProgActivity"
+	android:layout_margin="10dp">
 
-    <TextView
-        android:id="@+id/tv_prog_name"
-        android:text="Program Name"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-
-    <TextView
-        android:id="@+id/tv_location"
-        android:text="Location"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_prog_name"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <ImageView
-        android:id="@+id/iv_gps"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        app:srcCompat="@android:drawable/ic_menu_search"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_prog_name"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
-    <EditText
-        android:id="@+id/et_location"
-        android:hint="Use my current location"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_location"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <TextView
-        android:id="@+id/tv_date_range"
-        android:text="Date Range"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/et_location"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <EditText
-        android:id="@+id/et_date_range_1"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:hint="dd/mm/yyyy"
-        android:layout_marginStart="30dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_date_range"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
-
-    <EditText
-        android:id="@+id/et_date_range_2"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:inputType="date"
-        android:hint="dd/mm/yyyy"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_date_range"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+	<TextView
+		android:id="@+id/tv_prog_name"
+		android:text="Program Name"
+		android:textSize="30sp"
+		android:textStyle="bold"
+		android:textColor="@color/black"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintLeft_toLeftOf="parent"
+		/>
 
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_edit_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="50dp"
-        android:text="Cancel"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_date_range_1"
-        />
+	<TextView
+		android:id="@+id/tv_location"
+		android:text="Location"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		android:textColor="@color/black"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="20dp"
+		app:layout_constraintTop_toBottomOf="@id/tv_prog_name"
+		app:layout_constraintLeft_toLeftOf="parent"
+		/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_edit_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:text="Save"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_date_range_2"
-        />
+	<ImageView
+		android:id="@+id/iv_gps"
+		android:layout_width="20dp"
+		android:layout_height="20dp"
+		app:srcCompat="@android:drawable/ic_menu_search"
+		android:layout_marginTop="20dp"
+		app:layout_constraintTop_toBottomOf="@id/tv_prog_name"
+		app:layout_constraintRight_toRightOf="parent"
+		/>
+
+	<EditText
+		android:id="@+id/et_location"
+		android:hint="Use my current location"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		app:layout_constraintTop_toBottomOf="@id/tv_location"
+		app:layout_constraintLeft_toLeftOf="parent"
+		/>
+
+	<TextView
+		android:id="@+id/tv_date_range"
+		android:text="Date Range"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		android:textColor="@color/black"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="20dp"
+		app:layout_constraintTop_toBottomOf="@id/et_location"
+		app:layout_constraintLeft_toLeftOf="parent"
+		/>
+
+	<EditText
+		android:id="@+id/et_date_range_1"
+		android:layout_width="150dp"
+		android:layout_height="wrap_content"
+		android:inputType="date"
+		android:hint="dd/mm/yyyy"
+		android:layout_marginStart="30dp"
+		app:layout_constraintTop_toBottomOf="@id/tv_date_range"
+		app:layout_constraintLeft_toLeftOf="parent"
+		/>
+
+	<EditText
+		android:id="@+id/et_date_range_2"
+		android:layout_width="150dp"
+		android:layout_height="wrap_content"
+		android:inputType="date"
+		android:hint="dd/mm/yyyy"
+		android:layout_marginEnd="30dp"
+		app:layout_constraintTop_toBottomOf="@id/tv_date_range"
+		app:layout_constraintRight_toRightOf="parent"
+		/>
+
+
+	<androidx.appcompat.widget.AppCompatButton
+		android:id="@+id/btn_edit_cancel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="20dp"
+		android:layout_marginStart="50dp"
+		android:text="Cancel"
+		app:layout_constraintLeft_toLeftOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/et_date_range_1"
+		/>
+
+	<androidx.appcompat.widget.AppCompatButton
+		android:id="@+id/btn_edit_save"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="20dp"
+		android:layout_marginEnd="50dp"
+		android:text="Save"
+		app:layout_constraintRight_toRightOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/et_date_range_2"
+		/>
 </androidx.constraintlayout.widget.ConstraintLayout>

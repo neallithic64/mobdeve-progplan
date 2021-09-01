@@ -10,30 +10,30 @@ import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityUpdatePr
 
 public class UpdateProgActivity extends AppCompatActivity {
 
-    private ActivityUpdateProgBinding binding;
+	private ActivityUpdateProgBinding binding;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        binding = ActivityUpdateProgBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		binding = ActivityUpdateProgBinding.inflate(getLayoutInflater());
+		setContentView(binding.getRoot());
 //      TODO : Set up program progress item recycler adapter
 
-        initOnCLick();
-    }
+		initOnCLick();
+	}
 
-//    TODO: Set up Onclick Listeners
-    private void initOnCLick(){
-        binding.btnUpdateCancel.setOnClickListener(v->{
-         Intent gotoViewIndivProg = new Intent(UpdateProgActivity.this,ViewIndivProgActivity.class);
-         startActivity(gotoViewIndivProg);
-         finish();
-        });
-        binding.btnUpdateSave.setOnClickListener(v->{
+	//    TODO: Set up Onclick Listeners
+	private void initOnCLick(){
+		binding.btnUpdateCancel.setOnClickListener(v->{
+			Intent gotoViewIndivProg = new Intent(UpdateProgActivity.this,ViewIndivProgActivity.class);
+			startActivity(gotoViewIndivProg);
+			finish();
+		});
+		binding.btnUpdateSave.setOnClickListener(v->{
 //        TODO: Save update of progressitems to database
-            Intent gotoViewIndivProg = new Intent(UpdateProgActivity.this,ViewIndivProgActivity.class);
-            startActivity(gotoViewIndivProg);
-            finish();
-        });
-    }
+			Intent gotoViewIndivProg = new Intent(UpdateProgActivity.this,ViewIndivProgActivity.class);
+			startActivity(gotoViewIndivProg);
+			finish();
+		});
+	}
 }
