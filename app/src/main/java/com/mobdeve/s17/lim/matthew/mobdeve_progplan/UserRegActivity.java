@@ -17,7 +17,7 @@ public class UserRegActivity extends AppCompatActivity{
 		super.onCreate(savedInstanceState);
 		binding = ActivityUserRegBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
-
+		initOnClick();
 //      TODO Initialize Spinner with DB
 
 //      Initialize spinner adapter (will do it within CitySpinnerAdapter once db is set up)
