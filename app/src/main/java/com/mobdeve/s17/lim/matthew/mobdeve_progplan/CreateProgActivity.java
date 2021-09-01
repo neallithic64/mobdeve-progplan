@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -32,14 +33,18 @@ public class CreateProgActivity extends AppCompatActivity {
 			// TODO: add table row
 			TableRow newRow = new TableRow(this);
 			EditText name, value;
-			name = value = new EditText(this);
+
+			name = new EditText(this);
+			value = new EditText(this);
 
 			name.setBackground(getDrawable(R.drawable.border));
 			name.setLayoutParams(new TableRow.LayoutParams(
 					0,
 					TableRow.LayoutParams.MATCH_PARENT,
 					0.7f));
+//			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 			name.setTextColor(getColor(R.color.black));
+			name.setHint("Resource Name");
 			newRow.addView(name);
 
 			value.setBackground(getDrawable(R.drawable.border));
@@ -47,9 +52,10 @@ public class CreateProgActivity extends AppCompatActivity {
 					0,
 					TableRow.LayoutParams.MATCH_PARENT,
 					0.3f));
+			value.setHint("Value");
 			value.setTextColor(getColor(R.color.black));
 			// The specified child already has a parent. You must call removeView() on the child's parent first.
-			// newRow.addView(value);
+			 newRow.addView(value);
 
 			binding.tlResources.addView(newRow);
 			Log.d("TableLayout", "TableRow Count: " + binding.tlResources.getChildCount());
@@ -57,6 +63,33 @@ public class CreateProgActivity extends AppCompatActivity {
 
 		binding.ivAddOutcome.setOnClickListener(v -> {
 			// TODO: add table row
+			TableRow newRow = new TableRow(this);
+			EditText name, value;
+
+			name = new EditText(this);
+			value = new EditText(this);
+
+			name.setBackground(getDrawable(R.drawable.border));
+			name.setLayoutParams(new TableRow.LayoutParams(
+					0,
+					TableRow.LayoutParams.MATCH_PARENT,
+					0.7f));
+			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+			name.setTextColor(getColor(R.color.black));
+			name.setHint("Outcome Name");
+			newRow.addView(name);
+
+			value.setBackground(getDrawable(R.drawable.border));
+			value.setLayoutParams(new TableRow.LayoutParams(
+					0,
+					TableRow.LayoutParams.MATCH_PARENT,
+					0.3f));
+			value.setHint("Value");
+			value.setTextColor(getColor(R.color.black));
+			// The specified child already has a parent. You must call removeView() on the child's parent first.
+			newRow.addView(value);
+
+			binding.tlOutcomes.addView(newRow);
 		});
 
 		binding.btnCreateSave.setOnClickListener(v -> {
