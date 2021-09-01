@@ -61,7 +61,7 @@ public class CreateProgActivity extends AppCompatActivity {
 
 		binding.btnCreateSave.setOnClickListener(v -> {
 			// TODO: create HTTP request to server
-			Intent gotoViewProgs = new Intent(CreateProgActivity.this,ViewProgsActivity.class );
+			Intent gotoViewProgs = new Intent(CreateProgActivity.this,ViewIndivProgActivity.class );
 			startActivity(gotoViewProgs);
 			finish();
 		});
