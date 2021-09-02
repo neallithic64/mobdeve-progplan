@@ -33,10 +33,12 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 	private ArrayList<Program> programArrayList;
 	private Context context;
 	private int selected;
+	private ViewIndivProgListener listener;
 
-	public ProgramAdapter(ArrayList<Program> programArrayList, Context context) {
+	public ProgramAdapter(ArrayList<Program> programArrayList, Context context, ViewIndivProgListener listener) {
 		this.programArrayList = programArrayList;
 		this.context = context;
+		this.listener = listener;
 	}
 
 	public int getItemCount(){return programArrayList.size();}
@@ -57,17 +59,17 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 		holder.tv_proglist_location.setText(programArrayList.get(position).getCity());
 		holder.tv_proglist_dates.setText(formatter.format(programArrayList.get(position).getStartDate()) + " - " +
 				formatter.format(programArrayList.get(position).getEndDate()));
-
-		holder.btn_proglist_view.setOnClickListener(v->{
-			selected = position;
-		});
-
-		holder.program_cardView.setOnClickListener(v->{
-			selected = position;
-		});
+		holder.btn_proglist_view.setVisibility(View.VISIBLE);
+//		holder.btn_proglist_view.setOnClickListener(v->{
+//			selected = position;
+//		});
+//
+//		holder.program_cardView.setOnClickListener(v->{
+//			selected = position;
+//		});
 	}
 
-	protected class ProgramViewHolder extends RecyclerView.ViewHolder{
+	protected class ProgramViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 		ImageView		iv_proglist_progress;
 		TextView 		tv_proglist_name;
 		TextView 		tv_proglist_location;
@@ -82,7 +84,12 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 			tv_proglist_dates = view.findViewById(R.id.tv_proglist_dates);
 			btn_proglist_view = view.findViewById(R.id.btn_proglist_view);
 			program_cardView = view.findViewById(R.id.program_cardview);
-//			view.setOnClickListener(this);
+			view.setOnClickListener(this);
+		}
+
+		@Override
+		public void onClick(View v) {
+			listener.onClick(v, getAdapterPosition());
 		}
 	}
 

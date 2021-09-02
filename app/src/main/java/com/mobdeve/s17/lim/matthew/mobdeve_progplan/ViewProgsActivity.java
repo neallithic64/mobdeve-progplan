@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.adapters.ProgramAdapter;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityViewProgsBinding;
@@ -21,6 +22,8 @@ public class ViewProgsActivity extends AppCompatActivity {
 	private ActivityViewProgsBinding 	binding;
 	private ArrayList<Program>			programArrayList;
 	private ProgramAdapter				programAdapter;
+
+	private ProgramAdapter.ViewIndivProgListener listener;
 	private int position;
 	private Menu menu;
 	@Override
@@ -29,8 +32,9 @@ public class ViewProgsActivity extends AppCompatActivity {
 		binding = ActivityViewProgsBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
 
+		setOnClickListener();
 		initializeProgramData();
-		programAdapter = new ProgramAdapter(programArrayList,getApplicationContext());
+		programAdapter = new ProgramAdapter(programArrayList,getApplicationContext(),listener);
 		binding.rvProglist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 		binding.rvProglist.setAdapter(programAdapter);
 
@@ -87,5 +91,15 @@ public class ViewProgsActivity extends AppCompatActivity {
 				new Date(),new Date(),"Sample Street Name", "Malabon City",10, "In Progress"));
 		programArrayList.add(new Program("PI000002","User01","Sample Program 2",
 				new Date(),new Date(),"Sample Street Name", "Quezon City",10, "In Progress"));
+	}
+
+	private void setOnClickListener(){
+		listener = new ProgramAdapter.ViewIndivProgListener() {
+			@Override
+			public void onClick(View v, int pos) {
+				Intent intent = new Intent(getApplicationContext(), ViewIndivProgActivity.class);
+				startActivity(intent);
+			}
+		};
 	}
 }
