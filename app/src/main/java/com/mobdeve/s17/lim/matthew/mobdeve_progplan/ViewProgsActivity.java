@@ -5,6 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.adapters.ProgramAdapter;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityViewProgsBinding;
@@ -19,6 +22,7 @@ public class ViewProgsActivity extends AppCompatActivity {
 	private ArrayList<Program>			programArrayList;
 	private ProgramAdapter				programAdapter;
 	private int position;
+	private Menu menu;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -30,9 +34,26 @@ public class ViewProgsActivity extends AppCompatActivity {
 		binding.rvProglist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 		binding.rvProglist.setAdapter(programAdapter);
 
+
 		initOnClick();
 	}
 
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main_menu, menu);
+		return true;
+	}
+
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+			case R.id.menu_filter:
+				new FilterDialogFragment().show(getSupportFragmentManager(),null);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
 	@Override
 	protected void onResume() {
 		super.onResume();

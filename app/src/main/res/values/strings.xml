@@ -1,24 +1,26 @@
 <resources>
-    <string name="app_name">ProgramPlan</string>
-    <!--Default values for city, can be modified so it linked to database-->
-    <string-array name="city_array">
-        <item>Location/City</item>
-        <item>Manila City</item>
-        <item>Quezon City</item>
-        <item>Caloocan City</item>
-        <item>Las Pinas City</item>
-        <item>Makati City</item>
-        <item>Marikina City</item>
-        <item>Malabon City</item>
-        <item>Mandaluyong City</item>
-        <item>Marikina City</item>
-        <item>Muntinlupa City</item>
-        <item>Navotas City</item>
-        <item>Paranaque City</item>
-        <item>Pasay City</item>
-        <item>Pasig City</item>
-        <item>San Juan City</item>
-        <item>Taguig City</item>
-        <item>Valenzuela City</item>
-    </string-array>
+	<string name="app_name">ProgramPlan</string>
+	<!--Default values for city, can be modified so it linked to database-->
+	<string-array name="city_array">
+		<item>Location/City</item>
+		<item>Manila City</item>
+		<item>Quezon City</item>
+		<item>Caloocan City</item>
+		<item>Las Pinas City</item>
+		<item>Makati City</item>
+		<item>Marikina City</item>
+		<item>Malabon City</item>
+		<item>Mandaluyong City</item>
+		<item>Marikina City</item>
+		<item>Muntinlupa City</item>
+		<item>Navotas City</item>
+		<item>Paranaque City</item>
+		<item>Pasay City</item>
+		<item>Pasig City</item>
+		<item>San Juan City</item>
+		<item>Taguig City</item>
+		<item>Valenzuela City</item>
+	</string-array>
+	<!-- TODO: Remove or change this placeholder text -->
+	<string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

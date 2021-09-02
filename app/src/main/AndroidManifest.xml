@@ -30,14 +30,14 @@
 			android:name="com.google.android.geo.API_KEY"
 			android:value="@string/google_maps_key" />-->
 
-		<activity android:name=".ViewIndivProgActivity" />
-		<activity android:name=".UpdateProgActivity" />
-		<activity android:name=".EditProgActivity" />
-		<activity android:name=".ViewProgsActivity" />
-		<activity android:name=".EvaluateProgActivity" />
-		<activity android:name=".CreateProgActivity" />
-		<activity android:name=".UserRegActivity" />
-		<activity android:name=".MainActivity">
+		<activity android:name=".ViewIndivProgActivity" android:label="View Program"/>
+		<activity android:name=".UpdateProgActivity" android:label="Update Program Checklist"/>
+		<activity android:name=".EditProgActivity" android:label="Edit Program"/>
+		<activity android:name=".ViewProgsActivity" android:label="View Programs" android:theme="@style/Theme.Mobdeveprogplan.WithActionBar"/>
+		<activity android:name=".EvaluateProgActivity" android:label="Evaluate Program"/>
+		<activity android:name=".CreateProgActivity" android:label="Create Program"/>
+		<activity android:name=".UserRegActivity" android:theme="@style/Theme.Mobdeveprogplan.NoActionBar"/>
+		<activity android:name=".MainActivity" android:theme="@style/Theme.Mobdeveprogplan.NoActionBar">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
