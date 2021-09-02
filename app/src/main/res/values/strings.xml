@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ProgramPlan</string>
-
     <!--Default values for city, can be modified so it linked to database-->
     <string-array name="city_array">
         <item>Location/City</item>

@@ -43,6 +43,10 @@ public class EditProgActivity extends AppCompatActivity {
 			startActivity(gotoViewIndivProg);
 			finish();
 		});
+
+		binding.ivGps.setOnClickListener(v->{
+			new MapDialogFragment().show(getSupportFragmentManager(), null);
+		});
 	}
 
     /*public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {

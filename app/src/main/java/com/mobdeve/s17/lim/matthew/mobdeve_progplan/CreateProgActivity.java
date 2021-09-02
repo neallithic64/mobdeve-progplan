@@ -27,6 +27,7 @@ public class CreateProgActivity extends AppCompatActivity {
 	private void initOnClick() {
 		binding.ivGps.setOnClickListener(v -> {
 			// TODO: implement the modal for the maps
+			new MapDialogFragment().show(getSupportFragmentManager(), null);
 		});
 
 		binding.ivAddResource.setOnClickListener(v -> {
