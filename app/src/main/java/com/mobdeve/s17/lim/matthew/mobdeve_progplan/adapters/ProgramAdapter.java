@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.R;
@@ -60,6 +61,10 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 		holder.btn_proglist_view.setOnClickListener(v->{
 			selected = position;
 		});
+
+		holder.program_cardView.setOnClickListener(v->{
+			selected = position;
+		});
 	}
 
 	protected class ProgramViewHolder extends RecyclerView.ViewHolder{
@@ -68,7 +73,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 		TextView 		tv_proglist_location;
 		TextView 		tv_proglist_dates;
 		AppCompatButton btn_proglist_view;
-
+		CardView		program_cardView;
 		public ProgramViewHolder(View view){
 			super(view);
 			iv_proglist_progress = view.findViewById(R.id.iv_proglist_progress);
@@ -76,6 +81,12 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 			tv_proglist_location = view.findViewById(R.id.tv_proglist_location);
 			tv_proglist_dates = view.findViewById(R.id.tv_proglist_dates);
 			btn_proglist_view = view.findViewById(R.id.btn_proglist_view);
+			program_cardView = view.findViewById(R.id.program_cardview);
+//			view.setOnClickListener(this);
 		}
+	}
+
+	public interface  ViewIndivProgListener{
+		void onClick(View v, int pos);
 	}
 }

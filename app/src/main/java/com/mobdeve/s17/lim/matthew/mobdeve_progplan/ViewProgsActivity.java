@@ -77,6 +77,8 @@ public class ViewProgsActivity extends AppCompatActivity {
 				startActivity(gotoViewIndivProg);
 //			}
 		});
+
+//		binding.
 	}
 
 	private void initializeProgramData(){
