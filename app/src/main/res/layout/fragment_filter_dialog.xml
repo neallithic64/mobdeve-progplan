@@ -3,12 +3,97 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	tools:context=".FilterDialogFragment">
 
-	<!-- TODO: Update blank fragment layout -->
-	<TextView
+
+
+	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:text="@string/hello_blank_fragment" />
+		>
+
+		<TextView
+			android:id="@+id/tv_title"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:gravity="center"
+			android:textStyle="bold"
+			android:textColor="@color/black"
+			android:text="Filter Programs"
+			android:textSize="30dp"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"/>
+
+		<TextView
+			android:id="@+id/tv_location"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textSize="24sp"
+			android:text="Location"
+			android:textColor="@color/black"
+			android:textStyle="bold"
+			app:layout_constraintTop_toBottomOf="@+id/tv_title"
+			android:layout_marginTop="20dp"/>
+		<Spinner
+			android:id="@+id/spinner_city"
+			android:layout_width="250dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp"
+			app:layout_constraintTop_toBottomOf="@+id/tv_location"
+			app:layout_constraintLeft_toLeftOf="parent"
+			/>
+
+		<TextView
+			android:id="@+id/tv_date_range"
+			android:text="Date Range"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			android:textColor="@color/black"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp"
+			app:layout_constraintTop_toBottomOf="@id/spinner_city"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			/>
+
+		<EditText
+			android:id="@+id/et_date_range_1"
+			android:layout_width="120dp"
+			android:layout_height="wrap_content"
+			android:inputType="date"
+			android:hint="dd/mm/yyyy"
+			android:layout_marginStart="30dp"
+			app:layout_constraintTop_toBottomOf="@id/tv_date_range"
+			app:layout_constraintLeft_toLeftOf="parent"
+			android:layout_marginLeft="5dp"
+			/>
+
+		<EditText
+			android:id="@+id/et_date_range_2"
+			android:layout_width="120dp"
+			android:layout_height="wrap_content"
+			android:inputType="date"
+			android:hint="dd/mm/yyyy"
+			android:layout_marginEnd="30dp"
+			app:layout_constraintTop_toBottomOf="@id/tv_date_range"
+			app:layout_constraintRight_toRightOf="parent"
+			android:layout_marginRight="5dp"
+			/>
+
+		<androidx.appcompat.widget.AppCompatButton
+			android:id="@+id/btn_filterprograms"
+			android:layout_width="300dp"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="20dp"
+			android:text="Filter"
+			app:layout_constraintTop_toBottomOf="@id/et_date_range_1"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			/>
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </FrameLayout>
