@@ -4,9 +4,9 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.apimodels.LoginResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -18,7 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public class APIClient {
@@ -49,6 +48,9 @@ public class APIClient {
 
 		@POST("/api/progp/adminreg")
 		Call<ResponseBody> postAdminReg(@Body Admin admin);
+
+		@POST("/api/progp/login")
+		Call<LoginResponse> postLogin(@Body User user);
 
 		@GET("/api/progp/progadd")
 		Call<ResponseBody> postCreateProgram(@Body Program program);

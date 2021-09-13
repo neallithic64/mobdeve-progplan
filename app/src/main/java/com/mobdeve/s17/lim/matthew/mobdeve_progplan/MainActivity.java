@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.apimodels.LoginResponse;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityMainBinding;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.*;
 
@@ -21,26 +22,32 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 	private ActivityMainBinding binding;
 	private APIClient apiClient;
+	private Bundle bundle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		binding = ActivityMainBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
+		bundle = new Bundle();
+
 		initOnClick();
 		apiClient = new APIClient();
-		getPrograms();
-//		postAdminReg("sent@from.android", "SENT_WITH_ANDROID", "YAY");
+		// getPrograms();
+//		postAdminReg("admin@gmail.com", "superAdmin", "admin");
+
 	}
 	
 	private void initOnClick() {
 		binding.btnLogin.setOnClickListener(v -> {
 			// TODO: login button...
 			// TODO : user rationale (withdb)
-
-			Intent gotoViewProgs = new Intent(MainActivity.this, ViewProgsActivity.class);
-			startActivity(gotoViewProgs);
-			finish();
+			String email = binding.etEmail.getText().toString();
+			String pass = binding.etPassword.getText().toString();
+			loginUser(email, pass);
+			// Intent gotoViewProgs = new Intent(MainActivity.this, ViewProgsActivity.class);
+			// startActivity(gotoViewProgs);
+			// finish();
 		});
 
 		binding.btnRegister.setOnClickListener( v ->{
@@ -89,5 +96,38 @@ public class MainActivity extends AppCompatActivity {
 
 	private void postCreateProgram() {
 		// Program newProg = new Program();
+	}
+
+	private void loginUser(String email, String password) {
+		Call<LoginResponse> call = apiClient.APIservice.postLogin(new User(email,"",password,""));
+		call.enqueue(new Callback<LoginResponse>() {
+			@Override
+			public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+				try {
+					if (response.body() != null) {
+						bundle.putInt("userType", response.body().getUserType());
+						bundle.putString("email", response.body().getEmail());
+						bundle.putString("username", response.body().getUsername());
+						if (response.body().getUserType() == 1) {
+							// user
+							bundle.putString("city", response.body().getEmail());
+							// intents
+						} else {
+							// admin
+							// intents
+							Toast.makeText(MainActivity.this, "Logged in: " + response.body().getEmail(), Toast.LENGTH_LONG).show();
+						}
+
+						Bundle newBundle = bundle;
+					} else Toast.makeText(MainActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
+				} catch (IOException e) {
+					Log.e("failedPostLogin", e.getMessage());
+				}
+			}
+			@Override
+			public void onFailure(Call<LoginResponse> call, Throwable t) {
+				Log.e("failedPostLogin", t.getMessage());
+			}
+		});
 	}
 }
