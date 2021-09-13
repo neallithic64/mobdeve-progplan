@@ -52,6 +52,9 @@ public class APIClient {
 		@POST("/api/progp/login")
 		Call<LoginResponse> postLogin(@Body User user);
 
+		@POST("/api/progp/userreg")
+		Call<ResponseBody> postUserReg(@Body User user);
+
 		@GET("/api/progp/progadd")
 		Call<ResponseBody> postCreateProgram(@Body Program program);
 

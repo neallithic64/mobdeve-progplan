@@ -37,7 +37,20 @@ public class MainActivity extends AppCompatActivity {
 //		postAdminReg("admin@gmail.com", "superAdmin", "admin");
 
 	}
-	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		binding.etPassword.setText("");
+		binding.etEmail.setText("");
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		bundle.clear();
+	}
+
 	private void initOnClick() {
 		binding.btnLogin.setOnClickListener(v -> {
 			// TODO: login button...
@@ -94,10 +107,6 @@ public class MainActivity extends AppCompatActivity {
 		});
 	}
 
-	private void postCreateProgram() {
-		// Program newProg = new Program();
-	}
-
 	private void loginUser(String email, String password) {
 		Call<LoginResponse> call = apiClient.APIservice.postLogin(new User(email,"",password,""));
 		call.enqueue(new Callback<LoginResponse>() {
@@ -111,10 +120,23 @@ public class MainActivity extends AppCompatActivity {
 						if (response.body().getUserType() == 1) {
 							// user
 							bundle.putString("city", response.body().getEmail());
+							bundle.putString("userType","user");
+
+							Intent gotoViewProgs = new Intent(MainActivity.this, ViewProgsActivity.class);
+							gotoViewProgs.putExtras(bundle);
+							startActivity(gotoViewProgs);
+
+							Toast.makeText(MainActivity.this, "Logged in: " + response.body().getEmail(), Toast.LENGTH_LONG).show();
 							// intents
 						} else {
 							// admin
 							// intents
+							bundle.putString("userType","admin");
+
+							Intent goToUserReg = new Intent(MainActivity.this,UserRegActivity.class);
+							goToUserReg.putExtras(bundle);
+							startActivity(goToUserReg);
+
 							Toast.makeText(MainActivity.this, "Logged in: " + response.body().getEmail(), Toast.LENGTH_LONG).show();
 						}
 
@@ -130,4 +152,5 @@ public class MainActivity extends AppCompatActivity {
 			}
 		});
 	}
+
 }
