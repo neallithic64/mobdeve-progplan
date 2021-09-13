@@ -5,17 +5,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.adapters.ProgramAdapter;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityViewProgsBinding;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.APIClient;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ViewProgsActivity extends AppCompatActivity {
 
@@ -26,14 +34,19 @@ public class ViewProgsActivity extends AppCompatActivity {
 	private ProgramAdapter.ViewIndivProgListener listener;
 	private int position;
 	private Menu menu;
+
+	private APIClient apiClient;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		binding = ActivityViewProgsBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
 
+		apiClient = new APIClient();
+
 		setOnClickListener();
 		initializeProgramData();
+//		getPrograms();
 		programAdapter = new ProgramAdapter(programArrayList,getApplicationContext(),listener);
 		binding.rvProglist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 		binding.rvProglist.setAdapter(programAdapter);
@@ -93,6 +106,22 @@ public class ViewProgsActivity extends AppCompatActivity {
 				new Date(),new Date(),"Sample Street Name", "Quezon City",10, "In Progress"));
 	}
 
+	private void getPrograms(){
+		programArrayList = new ArrayList<Program>();
+		Call<List<Program>> call = apiClient.APIservice.getPrograms();
+		call.enqueue(new Callback<List<Program>>() {
+			@Override
+			public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
+				String msg = "";
+				programArrayList = (ArrayList<Program>) response.body();
+				Toast.makeText(ViewProgsActivity.this, msg, Toast.LENGTH_LONG).show();
+			}
+			@Override
+			public void onFailure(Call<List<Program>> call, Throwable t) {
+				Log.e("failedGetPrograms", t.getMessage());
+			}
+		});
+	}
 	private void setOnClickListener(){
 		listener = new ProgramAdapter.ViewIndivProgListener() {
 			@Override

@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 		initOnClick();
 		apiClient = new APIClient();
-		// getPrograms();
+		 getPrograms();
 //		postAdminReg("admin@gmail.com", "superAdmin", "admin");
 
 	}
@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
 			// finish();
 		});
 
-		binding.btnRegister.setOnClickListener( v ->{
-			Intent gotoUserReg = new Intent(MainActivity.this,UserRegActivity.class);
-			startActivity(gotoUserReg);
-		});
+//		binding.btnRegister.setOnClickListener( v ->{
+//			Intent gotoUserReg = new Intent(MainActivity.this,UserRegActivity.class);
+//			startActivity(gotoUserReg);
+//		});
 	}
 
 	private void getPrograms() {

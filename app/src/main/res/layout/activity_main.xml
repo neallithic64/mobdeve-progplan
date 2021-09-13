@@ -65,15 +65,5 @@
 		app:layout_constraintRight_toRightOf="parent"
 	/>
 
-	<androidx.appcompat.widget.AppCompatButton
-		android:id="@+id/btn_register"
-		android:layout_width="300dp"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="10dp"
-		android:text="Register"
-		app:layout_constraintTop_toBottomOf="@id/btn_login"
-		app:layout_constraintLeft_toLeftOf="parent"
-		app:layout_constraintRight_toRightOf="parent"
-		/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
