@@ -30,6 +30,7 @@ public class ViewProgsActivity extends AppCompatActivity {
 	private ActivityViewProgsBinding 	binding;
 	private ArrayList<Program>			programArrayList;
 	private ProgramAdapter				programAdapter;
+	private Bundle						bundle;
 
 	private ProgramAdapter.ViewIndivProgListener listener;
 	private int position;
@@ -44,15 +45,26 @@ public class ViewProgsActivity extends AppCompatActivity {
 
 		apiClient = new APIClient();
 
+		bundle = new Bundle();
+		bundle = getIntent().getExtras();
+
 		setOnClickListener();
-		initializeProgramData();
-//		getPrograms();
+//		initializeProgramData();
+
+		getPrograms();
 		programAdapter = new ProgramAdapter(programArrayList,getApplicationContext(),listener);
 		binding.rvProglist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 		binding.rvProglist.setAdapter(programAdapter);
 
 
 		initOnClick();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		position = -1;
+		getPrograms();
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,11 +83,7 @@ public class ViewProgsActivity extends AppCompatActivity {
 				return super.onOptionsItemSelected(item);
 		}
 	}
-	@Override
-	protected void onResume() {
-		super.onResume();
-		position = -1;
-	}
+
 
 	private void initOnClick(){
 		binding.fabAddProg.setOnClickListener(v->{
@@ -95,7 +103,6 @@ public class ViewProgsActivity extends AppCompatActivity {
 //			}
 		});
 
-//		binding.
 	}
 
 	private void initializeProgramData(){
@@ -113,8 +120,19 @@ public class ViewProgsActivity extends AppCompatActivity {
 			@Override
 			public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
 				String msg = "";
+//				for(int i = 0; i < response.body().size();i++)
+//					programArrayList.add(new Program(response.body().get(i).getProgramId(),
+//							response.body().get(i).getUserCreated(),
+//							response.body().get(i).getProgramTitle(),
+//							response.body().get(i).getStartDate(),
+//							response.body().get(i).getEndDate(),
+//							response.body().get(i).getStreet(),
+//							response.body().get(i).getCity(),
+//							response.body().get(i).getProgress(),
+//							response.body().get(i).getStatus()));
 				programArrayList = (ArrayList<Program>) response.body();
-				Toast.makeText(ViewProgsActivity.this, msg, Toast.LENGTH_LONG).show();
+				Toast.makeText(ViewProgsActivity.this,Integer.toString(programArrayList.size()) , Toast.LENGTH_LONG).show();
+
 			}
 			@Override
 			public void onFailure(Call<List<Program>> call, Throwable t) {
@@ -127,7 +145,10 @@ public class ViewProgsActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v, int pos) {
 				Intent intent = new Intent(getApplicationContext(), ViewIndivProgActivity.class);
+				bundle.putString("programId","hi");
+				intent.putExtras(bundle);
 				startActivity(intent);
+//				Toast.makeText(ViewProgsActivity.this,programArrayList.get(pos).getProgramId(),Toast.LENGTH_LONG).show();
 			}
 		};
 	}

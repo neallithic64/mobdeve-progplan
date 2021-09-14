@@ -22,6 +22,8 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 	private ArrayList<Outcome> outcomeArrayList;
 	private ArrayList<Resource> resourceArrayList;
 	private ArrayList<ProgChecklist> progChecklistArrayList;
+	private Bundle bundle;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
