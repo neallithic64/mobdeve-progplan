@@ -51,6 +51,12 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 		return programViewHolder;
 	}
 
+	public void changeDataSet(ArrayList<Program> programArrayList){
+		this.programArrayList.clear();
+		this.programArrayList.addAll(programArrayList);
+		notifyDataSetChanged();
+	}
+
 	@Override
 	public void onBindViewHolder(ProgramAdapter.ProgramViewHolder holder, int position) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

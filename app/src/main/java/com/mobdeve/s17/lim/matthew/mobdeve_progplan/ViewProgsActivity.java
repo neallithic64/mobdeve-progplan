@@ -88,7 +88,7 @@ public class ViewProgsActivity extends AppCompatActivity {
 	private void initOnClick(){
 		binding.fabAddProg.setOnClickListener(v->{
 			Intent gotoCreateProg = new Intent(ViewProgsActivity.this,CreateProgActivity.class);
-
+			gotoCreateProg.putExtras(bundle);
 			startActivity(gotoCreateProg);
 		});
 
@@ -131,6 +131,7 @@ public class ViewProgsActivity extends AppCompatActivity {
 //							response.body().get(i).getProgress(),
 //							response.body().get(i).getStatus()));
 				programArrayList = (ArrayList<Program>) response.body();
+				programAdapter.changeDataSet(programArrayList);
 				Toast.makeText(ViewProgsActivity.this,Integer.toString(programArrayList.size()) , Toast.LENGTH_LONG).show();
 
 			}
