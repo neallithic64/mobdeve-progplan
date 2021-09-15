@@ -12,15 +12,25 @@ import android.widget.LinearLayout;
 import android.widget.TableRow;
 
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityCreateProgBinding;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.*;
+
+import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CreateProgActivity extends AppCompatActivity {
 	private ActivityCreateProgBinding binding;
+	private APIClient apiClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		binding = ActivityCreateProgBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
+		apiClient = new APIClient();
 		initOnClick();
 	}
 
@@ -105,6 +115,25 @@ public class CreateProgActivity extends AppCompatActivity {
 			Intent gotoViewProgs = new Intent(CreateProgActivity.this, ViewProgsActivity.class);
 			startActivity(gotoViewProgs);
 			finish();
+		});
+	}
+
+	private void postCreateProgram() {
+		// TODO: get variables here
+		Program newProgram = new Program();
+		ArrayList<Outcome> outcomes = new ArrayList<>();
+		ArrayList<Resource> resources = new ArrayList<>();
+		ProgramJS programReq = new ProgramJS(newProgram, outcomes, resources);
+		Call<ResponseBody> call = apiClient.APIservice.postCreateProgram(programReq);
+		call.enqueue(new Callback<ResponseBody>() {
+			@Override
+			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+			}
+			@Override
+			public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+			}
 		});
 	}
 }

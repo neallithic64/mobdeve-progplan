@@ -15,6 +15,13 @@ public class ProgramJS {
 	private ArrayList<Resource> resources;
 	private ArrayList<ProgChecklist> checklistItems;
 
+	public ProgramJS(Program program, ArrayList<Outcome> outcomes, ArrayList<Resource> resources) {
+		this.program = program;
+		this.outcomes = outcomes;
+		this.resources = resources;
+		this.checklistItems = new ArrayList<>();
+	}
+
 	public ProgramJS(Program program, ArrayList<Outcome> outcomes, ArrayList<Resource> resources, ArrayList<ProgChecklist> checklistItems) {
 		this.program = program;
 		this.outcomes = outcomes;

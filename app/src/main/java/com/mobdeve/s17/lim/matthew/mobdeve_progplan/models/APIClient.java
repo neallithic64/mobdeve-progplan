@@ -55,8 +55,8 @@ public class APIClient {
 		@POST("/api/progp/userreg")
 		Call<ResponseBody> postUserReg(@Body User user);
 
-		@GET("/api/progp/progadd")
-		Call<ResponseBody> postCreateProgram(@Body Program program);
+		@POST("/api/progp/progadd")
+		Call<ResponseBody> postCreateProgram(@Body ProgramJS program);
 
 		/* Template for query paths */
 		@GET("/group/users")

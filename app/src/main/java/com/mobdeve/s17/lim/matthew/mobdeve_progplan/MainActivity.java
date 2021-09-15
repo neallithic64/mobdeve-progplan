@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 		initOnClick();
 		apiClient = new APIClient();
-		 getPrograms();
+		getPrograms();
 //		postAdminReg("admin@gmail.com", "superAdmin", "admin");
 
 	}
@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
 	private void initOnClick() {
 		binding.btnLogin.setOnClickListener(v -> {
-			// TODO: login button...
-			// TODO : user rationale (withdb)
 			String email = binding.etEmail.getText().toString();
 			String pass = binding.etPassword.getText().toString();
 			loginUser(email, pass);
