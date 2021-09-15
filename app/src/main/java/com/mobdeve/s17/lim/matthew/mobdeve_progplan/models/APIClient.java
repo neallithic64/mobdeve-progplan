@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.apimodels.LoginResponse;
 
+import java.text.DateFormat;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class APIClient {
 
 	public APIClient() {
 		gson = new GsonBuilder()
-				.setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+				.setDateFormat(DateFormat.FULL)
 				.setLenient()
 				.create();
 		retrofit = new Retrofit
