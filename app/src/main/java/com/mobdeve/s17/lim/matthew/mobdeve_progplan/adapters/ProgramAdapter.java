@@ -59,7 +59,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 
 	@Override
 	public void onBindViewHolder(ProgramAdapter.ProgramViewHolder holder, int position) {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 //		holder.iv_proglist_progress.setImageResource();
 		holder.tv_proglist_name.setText(programArrayList.get(position).getProgramTitle());
 		holder.tv_proglist_location.setText(programArrayList.get(position).getCity());

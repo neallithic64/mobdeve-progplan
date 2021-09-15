@@ -12,6 +12,12 @@ public class Resource {
 		this.expectedAmt = expectedAmt;
 	}
 
+	public Resource(String resourceName, int expectedAmt) {
+		this.programId = "";
+		this.resourceName = resourceName;
+		this.expectedAmt = expectedAmt;
+	}
+
 	public String getResourceName() { return resourceName; }
 	public String getProgramId() { return programId; }
 	public int getExpectedAmt() { return expectedAmt; }

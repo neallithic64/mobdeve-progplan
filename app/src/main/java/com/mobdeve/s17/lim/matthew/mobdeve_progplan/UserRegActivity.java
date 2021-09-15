@@ -112,7 +112,7 @@ public class UserRegActivity extends AppCompatActivity{
 			}
 			@Override
 			public void onFailure(Call<ResponseBody> call, Throwable t) {
-				Log.e("failedPostAddUser", t.getMessage());
+				Log.e("failedUserReg", t.getMessage());
 			}
 		});
 	}

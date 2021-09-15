@@ -12,6 +12,12 @@ public class Outcome {
 		this.expectedVal = expectedVal;
 	}
 
+	public Outcome(String outcomeName, int expectedVal) {
+		this.programId = "";
+		this.outcomeName = outcomeName;
+		this.expectedVal = expectedVal;
+	}
+
 	public String getOutcomeName() { return outcomeName; }
 	public String getProgramId() { return programId; }
 	public int getExpectedVal() { return expectedVal; }

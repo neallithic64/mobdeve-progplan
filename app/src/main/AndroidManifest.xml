@@ -42,7 +42,8 @@
 		<activity
 			android:name=".ViewProgsActivity"
 			android:label="View Programs"
-			android:theme="@style/Theme.Mobdeveprogplan.WithActionBar" />
+			android:theme="@style/Theme.Mobdeveprogplan.WithActionBar" >
+		</activity>
 		<activity
 			android:name=".EvaluateProgActivity"
 			android:label="Evaluate Program" />

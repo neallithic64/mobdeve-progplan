@@ -120,16 +120,7 @@ public class ViewProgsActivity extends AppCompatActivity {
 			@Override
 			public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
 				String msg = "";
-//				for(int i = 0; i < response.body().size();i++)
-//					programArrayList.add(new Program(response.body().get(i).getProgramId(),
-//							response.body().get(i).getUserCreated(),
-//							response.body().get(i).getProgramTitle(),
-//							response.body().get(i).getStartDate(),
-//							response.body().get(i).getEndDate(),
-//							response.body().get(i).getStreet(),
-//							response.body().get(i).getCity(),
-//							response.body().get(i).getProgress(),
-//							response.body().get(i).getStatus()));
+
 				programArrayList = (ArrayList<Program>) response.body();
 				programAdapter.changeDataSet(programArrayList);
 				Toast.makeText(ViewProgsActivity.this,Integer.toString(programArrayList.size()) , Toast.LENGTH_LONG).show();
