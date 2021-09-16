@@ -62,14 +62,15 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 	private void initOnClick(){
 		binding.btnEdit.setOnClickListener(v->{
 			Intent gotoEditProg = new Intent(ViewIndivProgActivity.this,EditProgActivity.class);
-			bundle.putParcelable("program", program);
-			bundle.putParcelableArrayList("progchecklist", progChecklistArrayList);
-			gotoEditProg.putExtras(bundle);
+
 			startActivity(gotoEditProg);
 			finish();
 		});
 		binding.btnUpdate.setOnClickListener(v->{
 			Intent gotoUpdateProg = new Intent(ViewIndivProgActivity.this,UpdateProgActivity.class);
+			bundle.putParcelable("program", program);
+			bundle.putParcelableArrayList("progchecklist", progChecklistArrayList);
+			gotoUpdateProg.putExtras(bundle);
 			startActivity(gotoUpdateProg);
 			finish();
 		});
@@ -103,8 +104,11 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 	}
 
 	private void loadOutcomes(){
-		int i = 0;
+		int i;
 
+		binding.tlOutcomes.removeViews(1, binding.tlOutcomes.getChildCount() - 1);
+
+		i = 0;
 		while (i < outcomeArrayList.size())
 		{
 			TableRow newRow = new TableRow(this);
@@ -141,6 +145,8 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 	private void loadResources(){
 		int i = 0;
 
+		binding.tlResources.removeViews(1, binding.tlResources.getChildCount() - 1);
+
 		while (i < resourceArrayList.size())
 		{
 			TableRow newRow = new TableRow(this);
@@ -176,6 +182,8 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 
 	private void loadChecklist(){
 		int i = 0;
+
+		binding.tlProgress.removeViews(1, binding.tlProgress.getChildCount() - 1);
 
 		while (i < progChecklistArrayList.size())
 		{
@@ -224,6 +232,7 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 		binding.tvDateRange.setText(formatter.format(program.getStartDate()) + " - " +
 				formatter.format(program.getEndDate()));
 		binding.tvLocation.setText(program.getStreet() + ", " + program.getCity());
+
 	}
 	private void getProgramDetails(){
 		outcomeArrayList = new ArrayList<>();

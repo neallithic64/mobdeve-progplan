@@ -26,6 +26,10 @@ public class ProgChecklist implements Parcelable {
 		this.checked = checked;
 	}
 
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+
 	@Override
 	public int describeContents() {
 		return 0;

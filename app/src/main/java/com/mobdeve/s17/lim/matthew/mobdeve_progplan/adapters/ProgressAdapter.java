@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -29,6 +31,10 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 
 	public int getItemCount(){return progChecklistArrayList.size();}
 
+	public ArrayList<ProgChecklist> getProgChecklistArrayList(){
+		return progChecklistArrayList;
+	}
+
 	@Override
 	public ProgressAdapter.ProgressViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		View view = LayoutInflater.from(parent.getContext())
@@ -41,6 +47,14 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 	public void onBindViewHolder(ProgressAdapter.ProgressViewHolder holder, int position) {
 		holder.tv_progressitem.setText(progChecklistArrayList.get(position).getProgItem());
 		holder.checkbox_checked.setChecked(progChecklistArrayList.get(position).isChecked());
+
+		holder.checkbox_checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				//set your object's last status
+				progChecklistArrayList.get(position).setChecked(isChecked);
+			}
+		});
+
 	}
 
 	protected class ProgressViewHolder extends RecyclerView.ViewHolder{

@@ -35,6 +35,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 	private int selected;
 	private ViewIndivProgListener listener;
 
+
 	public ProgramAdapter(ArrayList<Program> programArrayList, Context context, ViewIndivProgListener listener) {
 		this.programArrayList = programArrayList;
 		this.context = context;

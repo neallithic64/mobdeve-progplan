@@ -5,9 +5,11 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.apimodels.LoginResponse;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.apimodels.UpdateJS;
 
 import java.text.DateFormat;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -59,6 +61,8 @@ public class APIClient {
 		@POST("/api/progp/progadd")
 		Call<ResponseBody> postCreateProgram(@Body ProgramJS program);
 
+		@POST("/api/progp/progchkl")
+		Call<ResponseBody> postUpdateChecklist(@Body UpdateJS updateJS);
 		/* Template for query paths */
 		@GET("/group/users")
 		Call<List<User>> groupList(@Query("id") int groupId, String query);
