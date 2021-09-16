@@ -94,12 +94,13 @@ public class UpdateProgActivity extends AppCompatActivity {
 	}
 
 	private void updateChecklist(){
-		Call<ResponseBody> call = apiClient.APIservice.postUpdateChecklist(new UpdateJS(program.getProgramId(), progChecklistArrayList));
+		Call<ResponseBody> call = apiClient.APIservice.postUpdateChecklist(progChecklistArrayList);
 		call.enqueue(new Callback<ResponseBody>() {
 			@Override
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 				try {
-					Toast.makeText(UpdateProgActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
+					Toast.makeText(UpdateProgActivity.this, response.body().string(), Toast.LENGTH_LONG).show();
+					returnToViewProg();
 				} catch (IOException e) {
 					Log.e("failedUpdateProgram", e.getMessage());
 				}

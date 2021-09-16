@@ -62,12 +62,12 @@ public class APIClient {
 		Call<ResponseBody> postCreateProgram(@Body ProgramJS program);
 
 		@POST("/api/progp/progchkl")
-		Call<ResponseBody> postUpdateChecklist(@Body UpdateJS updateJS);
+		Call<ResponseBody> postUpdateChecklist(@Body ArrayList<ProgChecklist> checklist);
 		/* Template for query paths */
 		@GET("/group/users")
 		Call<List<User>> groupList(@Query("id") int groupId, String query);
 
-		@GET("/api/progp/progdeets?*")
+		@GET("/api/progp/progdeets")
 		Call<ProgramJS> getProgramDetails(@Query("id") String id);
 	}
 

@@ -62,7 +62,8 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 	private void initOnClick(){
 		binding.btnEdit.setOnClickListener(v->{
 			Intent gotoEditProg = new Intent(ViewIndivProgActivity.this,EditProgActivity.class);
-
+			bundle.putParcelable("program", program);
+			gotoEditProg.putExtras(bundle);
 			startActivity(gotoEditProg);
 			finish();
 		});
@@ -76,6 +77,10 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 		});
 		binding.btnEvaluate.setOnClickListener(v->{
 			Intent gotoEvaluateProg = new Intent(ViewIndivProgActivity.this,EvaluateProgActivity.class);
+			bundle.putParcelable("program", program);
+			bundle.putParcelableArrayList("outcomes",outcomeArrayList);
+			bundle.putParcelableArrayList("resources",resourceArrayList);
+			gotoEvaluateProg.putExtras(bundle);
 			startActivity(gotoEvaluateProg);
 			finish();
 		});

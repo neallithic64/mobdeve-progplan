@@ -72,6 +72,7 @@ public class CreateProgActivity extends AppCompatActivity {
 //			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 			name.setTextColor(getColor(R.color.black));
 			name.setHint("Resource Name");
+			name.setTextSize(12);
 			newRow.addView(name);
 
 			value.setBackground(getDrawable(R.drawable.border));
@@ -80,6 +81,7 @@ public class CreateProgActivity extends AppCompatActivity {
 					TableRow.LayoutParams.MATCH_PARENT,
 					0.3f));
 			value.setHint("Value");
+			value.setTextSize(12);
 			value.setTextColor(getColor(R.color.black));
 			value.setInputType(InputType.TYPE_CLASS_NUMBER);
 			// The specified child already has a parent. You must call removeView() on the child's parent first.
@@ -102,8 +104,8 @@ public class CreateProgActivity extends AppCompatActivity {
 					0,
 					TableRow.LayoutParams.MATCH_PARENT,
 					0.7f));
-			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 			name.setTextColor(getColor(R.color.black));
+			name.setTextSize(12);
 			name.setHint("Outcome Name");
 			newRow.addView(name);
 
@@ -114,6 +116,7 @@ public class CreateProgActivity extends AppCompatActivity {
 					0.3f));
 			value.setHint("Value");
 			value.setTextColor(getColor(R.color.black));
+			value.setTextSize(12);
 			value.setInputType(InputType.TYPE_CLASS_NUMBER);
 			// The specified child already has a parent. You must call removeView() on the child's parent first.
 			newRow.addView(value);
