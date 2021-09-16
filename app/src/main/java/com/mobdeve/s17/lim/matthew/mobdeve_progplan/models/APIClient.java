@@ -62,6 +62,9 @@ public class APIClient {
 		/* Template for query paths */
 		@GET("/group/users")
 		Call<List<User>> groupList(@Query("id") int groupId, String query);
+
+		@GET("/api/progp/progdeets?*")
+		Call<ProgramJS> getProgramDetails(@Query("id") String id);
 	}
 
 	/* This is NOT to be called anywhere in the application. This is only a template to

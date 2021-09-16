@@ -64,6 +64,7 @@ public class ViewProgsActivity extends AppCompatActivity {
 	protected void onResume() {
 		super.onResume();
 		position = -1;
+//		Toast.makeText(ViewProgsActivity.this,bundle.getString("email"),Toast.LENGTH_LONG).show();
 		getPrograms();
 	}
 
@@ -123,7 +124,7 @@ public class ViewProgsActivity extends AppCompatActivity {
 
 				programArrayList = (ArrayList<Program>) response.body();
 				programAdapter.changeDataSet(programArrayList);
-				Toast.makeText(ViewProgsActivity.this,Integer.toString(programArrayList.size()) , Toast.LENGTH_LONG).show();
+//				Toast.makeText(ViewProgsActivity.this,Integer.toString(programArrayList.size()) , Toast.LENGTH_LONG).show();
 
 			}
 			@Override
@@ -137,8 +138,8 @@ public class ViewProgsActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v, int pos) {
 				Intent intent = new Intent(getApplicationContext(), ViewIndivProgActivity.class);
-				bundle.putString("programId","hi");
 				intent.putExtras(bundle);
+				intent.putExtra("program", programArrayList.get(pos));
 				startActivity(intent);
 //				Toast.makeText(ViewProgsActivity.this,programArrayList.get(pos).getProgramId(),Toast.LENGTH_LONG).show();
 			}

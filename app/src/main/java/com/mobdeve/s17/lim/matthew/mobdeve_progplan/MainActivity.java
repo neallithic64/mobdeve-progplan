@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 				String msg = "";
 				for (int i = 0; i < response.body().size(); i++)
 					msg += response.body().get(i).getProgramId() + "\n";
-				Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
+//				Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
 			}
 			@Override
 			public void onFailure(Call<List<Program>> call, Throwable t) {

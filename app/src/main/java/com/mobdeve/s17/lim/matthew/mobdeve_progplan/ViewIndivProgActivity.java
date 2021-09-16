@@ -5,24 +5,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.apimodels.LoginResponse;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityViewIndivProgBinding;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.APIClient;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Outcome;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.ProgChecklist;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.ProgramJS;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Resource;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.User;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ViewIndivProgActivity extends AppCompatActivity {
 	private ActivityViewIndivProgBinding binding;
 	private ArrayList<Outcome> outcomeArrayList;
 	private ArrayList<Resource> resourceArrayList;
 	private ArrayList<ProgChecklist> progChecklistArrayList;
+	private Program	program;
 	private Bundle bundle;
+
+	private APIClient apiClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +47,24 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 		setContentView(binding.getRoot());
 		initOnClick();
 
-		initOutcomes();
-		loadOutcomes();
-		initResources();
-		loadResources();
-		initializeProgressData();
-		loadChecklist();
+		bundle = new Bundle();
+		bundle = getIntent().getExtras();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		program = (Program) bundle.getParcelable("program");
+		getProgramDetails();
+//		Toast.makeText(ViewIndivProgActivity.this,program.getProgramId(),Toast.LENGTH_LONG).show();
 	}
 
 	private void initOnClick(){
 		binding.btnEdit.setOnClickListener(v->{
 			Intent gotoEditProg = new Intent(ViewIndivProgActivity.this,EditProgActivity.class);
+			bundle.putParcelable("program", program);
+			bundle.putParcelableArrayList("progchecklist", progChecklistArrayList);
+			gotoEditProg.putExtras(bundle);
 			startActivity(gotoEditProg);
 			finish();
 		});
@@ -118,7 +141,7 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 	private void loadResources(){
 		int i = 0;
 
-		while (i < outcomeArrayList.size())
+		while (i < resourceArrayList.size())
 		{
 			TableRow newRow = new TableRow(this);
 			TextView name = new TextView(this);
@@ -150,10 +173,11 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 			i++;
 		}
 	}
+
 	private void loadChecklist(){
 		int i = 0;
 
-		while (i < outcomeArrayList.size())
+		while (i < progChecklistArrayList.size())
 		{
 			TableRow newRow = new TableRow(this);
 			TextView name = new TextView(this);
@@ -187,5 +211,47 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 
 			i++;
 		}
+	}
+
+	private void updateUI(){
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
+		loadChecklist();
+		loadResources();
+		loadOutcomes();
+
+		binding.tvProgName.setText(program.getProgramTitle());
+		binding.tvDateRange.setText(formatter.format(program.getStartDate()) + " - " +
+				formatter.format(program.getEndDate()));
+		binding.tvLocation.setText(program.getStreet() + ", " + program.getCity());
+	}
+	private void getProgramDetails(){
+		outcomeArrayList = new ArrayList<>();
+		resourceArrayList = new ArrayList<>();
+		progChecklistArrayList = new ArrayList<>();
+		Log.d("Testing","Entered getProgramDetails");
+		Call<ProgramJS> call = apiClient.APIservice.getProgramDetails(program.getProgramId());
+		call.enqueue(new Callback<ProgramJS>() {
+			@Override
+			public void onResponse(Call<ProgramJS> call, Response<ProgramJS> response) {
+				try {
+					if (response.body() != null) {
+						outcomeArrayList = (ArrayList<Outcome>) response.body().getOutcomes();
+						resourceArrayList = (ArrayList<Resource>) response.body().getResources();
+						progChecklistArrayList = (ArrayList<ProgChecklist>) response.body().getChecklist();
+						program = (Program) response.body().getProgram();
+
+						updateUI();
+						Log.d("TestingGetProgDetails", response.body().toString());
+					} else Toast.makeText(ViewIndivProgActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
+				} catch (IOException e) {
+					Log.e("failedGetDetails", e.getMessage());
+				}
+			}
+			@Override
+			public void onFailure(Call<ProgramJS> call, Throwable t) {
+				Log.e("failedGetDetails", t.getMessage());
+			}
+		});
 	}
 }

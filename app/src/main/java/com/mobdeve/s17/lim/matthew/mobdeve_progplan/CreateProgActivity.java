@@ -258,6 +258,9 @@ public class CreateProgActivity extends AppCompatActivity {
 		Program newProgram = new Program("", bundle.getString("email"),programTitle,startDate,endDate,street,city,0, "In progress");
 
 		ProgramJS programReq = new ProgramJS(newProgram, outcomeArrayList, resourceArrayList);
+		Log.d("StartDate : " ,programReq.getProgram().getStartDate().toString());
+		Log.d("EndDate : " ,programReq.getProgram().getEndDate().toString());
+
 		Call<ResponseBody> call = apiClient.APIservice.postCreateProgram(programReq);
 		call.enqueue(new Callback<ResponseBody>() {
 			@Override
@@ -265,7 +268,7 @@ public class CreateProgActivity extends AppCompatActivity {
 				try {
 					if (response.body() != null) {
 						Toast.makeText(CreateProgActivity.this, response.body().string(), Toast.LENGTH_LONG).show();
-						if (response.body().equals("Program created!"))
+						if (response.body().string().equals("Program created!"))
 							finish();
 					}
 					else Toast.makeText(CreateProgActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
