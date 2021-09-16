@@ -8,6 +8,7 @@
          location permissions for the "MyLocation" functionality.
     -->
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.INTERNET" />
 
 	<application
@@ -32,36 +33,45 @@
 
 		<activity
 			android:name=".ViewIndivProgActivity"
-			android:label="View Program" />
+			android:label="View Program"
+			android:screenOrientation="portrait"/>
 		<activity
 			android:name=".UpdateProgActivity"
-			android:label="Update Program Checklist" />
+			android:label="Update Program Checklist"
+			android:screenOrientation="portrait"/>
 		<activity
 			android:name=".EditProgActivity"
-			android:label="Edit Program" />
+			android:label="Edit Program"
+			android:screenOrientation="portrait"/>
 		<activity
 			android:name=".ViewProgsActivity"
 			android:label="View Programs"
-			android:theme="@style/Theme.Mobdeveprogplan.WithActionBar" >
+			android:theme="@style/Theme.Mobdeveprogplan.WithActionBar"
+			android:screenOrientation="portrait">
 		</activity>
 		<activity
 			android:name=".EvaluateProgActivity"
-			android:label="Evaluate Program" />
+			android:label="Evaluate Program"
+			android:screenOrientation="portrait"/>
 		<activity
 			android:name=".CreateProgActivity"
-			android:label="Create Program" />
+			android:label="Create Program"
+			android:screenOrientation="portrait"/>
 		<activity
 			android:name=".UserRegActivity"
-			android:theme="@style/Theme.Mobdeveprogplan.NoActionBar" />
+			android:theme="@style/Theme.Mobdeveprogplan.NoActionBar"
+			android:screenOrientation="portrait"/>
 		<activity
 			android:name=".MainActivity"
-			android:theme="@style/Theme.Mobdeveprogplan.NoActionBar">
+			android:theme="@style/Theme.Mobdeveprogplan.NoActionBar"
+			android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+		<service android:name=".MusicService"></service>
 	</application>
 
 </manifest>

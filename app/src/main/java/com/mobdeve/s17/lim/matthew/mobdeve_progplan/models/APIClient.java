@@ -61,6 +61,9 @@ public class APIClient {
 		@POST("/api/progp/progadd")
 		Call<ResponseBody> postCreateProgram(@Body ProgramJS program);
 
+		@POST("/api/progp/progeval")
+		Call<ResponseBody> postEvalProgram(@Body Feedback feedback);
+
 		@POST("/api/progp/progchkl")
 		Call<ResponseBody> postUpdateChecklist(@Body ArrayList<ProgChecklist> checklist);
 		/* Template for query paths */

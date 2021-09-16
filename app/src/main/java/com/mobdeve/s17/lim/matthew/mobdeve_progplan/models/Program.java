@@ -25,6 +25,7 @@ public class Program implements Parcelable {
 			return new Program[size];
 		}
 	};
+
 	public Program(String programId, String userCreated, String programTitle, Date startDate, Date endDate, String street, String city, int progress, String status) {
 		this.programId = programId;
 		this.userCreated = userCreated;
@@ -35,6 +36,20 @@ public class Program implements Parcelable {
 		this.city = city;
 		this.progress = progress;
 		this.status = status;
+	}
+
+
+
+	public Program(String programId, Date startDate, Date endDate, String street, String city) {
+		this.programId = programId;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.street = street;
+		this.city = city;
+		userCreated = "";
+		programTitle = "";
+		progress = 0;
+		status = "";
 	}
 
 	@Override
@@ -82,4 +97,7 @@ public class Program implements Parcelable {
 	public void setCity(String city) { this.city = city; }
 	public void setProgress(int progress) { this.progress = progress; }
 	public void setStatus(String status) { this.status = status; }
+	public void setStreet(String street) {
+		this.street = street;
+	}
 }

@@ -33,6 +33,7 @@ public class FilterDialogFragment extends DialogFragment {
 		binding.spinnerCity.setAdapter(cityadapter);
 
 		binding.btnFilterprograms.setOnClickListener(v -> {
+
 			dismiss();
 		});
 

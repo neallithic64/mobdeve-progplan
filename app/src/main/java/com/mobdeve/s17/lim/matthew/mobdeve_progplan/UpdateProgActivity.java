@@ -71,13 +71,9 @@ public class UpdateProgActivity extends AppCompatActivity {
 		});
 		binding.btnUpdateSave.setOnClickListener(v->{
 //        TODO: Save update of progressitems to database
-//			Intent gotoViewIndivProg = new Intent(UpdateProgActivity.this,ViewIndivProgActivity.class);
-//			startActivity(gotoViewIndivProg);
-//			finish();
 			progChecklistArrayList = progressAdapter.getProgChecklistArrayList();
 			String text= "";
 			updateChecklist();
-
 		});
 	}
 
@@ -111,6 +107,7 @@ public class UpdateProgActivity extends AppCompatActivity {
 			}
 		});
 	}
+
 	private void initializeProgressData(){
 		progChecklistArrayList = new ArrayList<ProgChecklist>();
 		progChecklistArrayList.add(new ProgChecklist("Sample Item 1","Prog000001",true));

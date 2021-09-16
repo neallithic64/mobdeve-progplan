@@ -2,59 +2,146 @@ package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityEditProgBinding;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.APIClient;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Feedback;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class EditProgActivity extends AppCompatActivity {
 
 	private ActivityEditProgBinding binding;
+	private Bundle bundle;
+	private Program program;
+	private DatePickerDialog picker;
+	private APIClient apiClient;
+
+	private static final SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		binding = ActivityEditProgBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
+
+		bundle = new Bundle();
+		bundle = getIntent().getExtras();
+		program = (Program) bundle.getParcelable("program");
+		
+		binding.etDateRange1.setText(formatter.format(program.getStartDate()));
+		binding.etDateRange2.setText(formatter.format(program.getEndDate()));
+		binding.etLocation.setText(program.getStreet() + ", " + program.getCity());
+
+		apiClient = new APIClient();
 		initOnClick();
 	}
 
-	/*  TODO: Set up Onclick Listeners
-		DatePicker Dialog is currently not opening
-
-	* */
 	private void initOnClick(){
-       /* binding.etDateRange1.setOnClickListener( v-> {
-            DatePicker mDatePickerDialogFragment;
-            mDatePickerDialogFragment = new com.mobdeve.s17.lim.matthew.mobdeve_progplan.DatePicker();
-            mDatePickerDialogFragment.show(getSupportFragmentManager(), "DATE PICK");
-        });*/
+
 		binding.btnEditCancel.setOnClickListener( v -> {
-			Intent gotoViewIndivProg = new Intent(EditProgActivity.this, ViewIndivProgActivity.class);
-			startActivity(gotoViewIndivProg);
-			finish();
+			returnToViewProg();
 		});
 
 		binding.btnEditSave.setOnClickListener( v -> {
 //      TODO : Save changes to database
-			Intent gotoViewIndivProg = new Intent(EditProgActivity.this, ViewIndivProgActivity.class);
-			startActivity(gotoViewIndivProg);
-			finish();
+			if(validateInput()){
+				modifyProgramVal();
+			}
 		});
 
 		binding.ivGps.setOnClickListener(v->{
 			new MapDialogFragment().show(getSupportFragmentManager(), null);
 		});
+
+		binding.etDateRange1.setOnClickListener(v->{
+			final Calendar cldr = Calendar.getInstance();
+			int day = cldr.get(Calendar.DAY_OF_MONTH);
+			int month = cldr.get(Calendar.MONTH);
+			int year = cldr.get(Calendar.YEAR);
+			// date picker dialog
+			picker = new DatePickerDialog(EditProgActivity.this,
+					new DatePickerDialog.OnDateSetListener() {
+						@Override
+						public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+							binding.etDateRange1.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year);
+						}
+					}, year, month, day);
+			picker.show();
+
+		});
+
+		binding.etDateRange2.setOnClickListener(v->{
+			final Calendar cldr = Calendar.getInstance();
+			int day = cldr.get(Calendar.DAY_OF_MONTH);
+			int month = cldr.get(Calendar.MONTH);
+			int year = cldr.get(Calendar.YEAR);
+			// date picker dialog
+			picker = new DatePickerDialog(EditProgActivity.this,
+					new DatePickerDialog.OnDateSetListener() {
+						@Override
+						public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+							binding.etDateRange2.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year);
+						}
+					}, year, month, day);
+			picker.show();
+
+		});
 	}
 
-    /*public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        Calendar mCalendar = Calendar.getInstance();
-        mCalendar.set(Calendar.YEAR, year);
-        mCalendar.set(Calendar.MONTH, month);
-        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
-        binding.etDateRange1.setText(selectedDate);
-    }*/
+	private void returnToViewProg(){
+		Intent gotoViewIndivProg = new Intent(EditProgActivity.this,ViewIndivProgActivity.class);
+		gotoViewIndivProg.putExtras(bundle);
+		startActivity(gotoViewIndivProg);
+		finish();
+	}
+
+	@Override
+	public void onBackPressed() {
+		returnToViewProg();
+	}
+
+	private boolean validateInput(){
+		Date date1 = new Date(binding.etDateRange1.getText().toString());
+		Date date2 = new Date(binding.etDateRange2.getText().toString());
+
+		if (date1.before(new Date())){
+			Toast.makeText(EditProgActivity.this,"Start Date should be before today",Toast.LENGTH_LONG).show();
+			return false;
+		}
+		else if (date1.after(date2)){
+			Toast.makeText(EditProgActivity.this,"End Date should be after Start Date", Toast.LENGTH_LONG).show();
+			return false;
+		}
+
+		if(binding.etLocation.getText().toString().isEmpty() || binding.etLocation.getText().toString().indexOf(',') == -1) {
+			Toast.makeText(EditProgActivity.this,"Location is invalid",Toast.LENGTH_LONG).show();
+			return false;
+		}
+
+		return true;
+	}
+
+	private void modifyProgramVal(){
+		int commaplacement = binding.etLocation.getText().toString().indexOf(',');
+
+		program.setStartDate(new Date(binding.etDateRange1.getText().toString()));
+		program.setEndDate(new Date(binding.etDateRange2.getText().toString()));
+		program.setStreet(binding.etLocation.getText().toString().substring(0,commaplacement));
+		program.setCity(binding.etLocation.getText().toString().substring(commaplacement + 2));
+
+		Toast.makeText(this, program.getStreet() + "\n" + program.getCity(), Toast.LENGTH_SHORT).show();
+	}
+	private void editProgram(){
+
+	}
 }

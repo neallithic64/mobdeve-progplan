@@ -44,9 +44,11 @@ public class CreateProgActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		binding = ActivityCreateProgBinding.inflate(getLayoutInflater());
 		setContentView(binding.getRoot());
+
 		apiClient = new APIClient();
 		bundle = new Bundle();
 		bundle = getIntent().getExtras();
+
 		initOnClick();
 	}
 
@@ -180,8 +182,11 @@ public class CreateProgActivity extends AppCompatActivity {
 						}
 					} else throw new Exception("No outcome table found");
 
+					int commaplacement = binding.etLocation.getText().toString().indexOf(',');
+
 					postCreateProgram(binding.etProgName.getText().toString().trim(), new Date(binding.etDateRange1.getText().toString()),
-							new Date(binding.etDateRange2.getText().toString()),"Acacia Street", "Malabon City");
+							new Date(binding.etDateRange2.getText().toString()),binding.etLocation.getText().toString().substring(0,commaplacement),
+							binding.etLocation.getText().toString().substring(commaplacement + 2));
 				}catch (Exception e) {
 					Toast.makeText(CreateProgActivity.this,e.getMessage(), Toast.LENGTH_LONG).show();
 				}
@@ -237,9 +242,10 @@ public class CreateProgActivity extends AppCompatActivity {
 				binding.tlResources.getChildCount() == 1) {
 			Toast.makeText(CreateProgActivity.this,"One or more fields are empty", Toast.LENGTH_LONG).show();
 			return false;
-		}
-
-		else{
+		}else if(binding.etLocation.getText().toString().isEmpty() || binding.etLocation.getText().toString().indexOf(',') == -1) {
+			Toast.makeText(CreateProgActivity.this,"Location is invalid",Toast.LENGTH_LONG).show();
+			return false;
+		} else{
 			Date date1 = new Date(binding.etDateRange1.getText().toString());
 			Date date2 = new Date(binding.etDateRange2.getText().toString());
 

@@ -66,7 +66,6 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 		holder.tv_proglist_location.setText(programArrayList.get(position).getCity());
 		holder.tv_proglist_dates.setText(formatter.format(programArrayList.get(position).getStartDate()) + " - " +
 				formatter.format(programArrayList.get(position).getEndDate()));
-		holder.btn_proglist_view.setVisibility(View.VISIBLE);
 //		holder.btn_proglist_view.setOnClickListener(v->{
 //			selected = position;
 //		});
@@ -81,7 +80,6 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 		TextView 		tv_proglist_name;
 		TextView 		tv_proglist_location;
 		TextView 		tv_proglist_dates;
-		AppCompatButton btn_proglist_view;
 		CardView		program_cardView;
 		public ProgramViewHolder(View view){
 			super(view);
@@ -89,7 +87,6 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 			tv_proglist_name = view.findViewById(R.id.tv_proglist_name);
 			tv_proglist_location = view.findViewById(R.id.tv_proglist_location);
 			tv_proglist_dates = view.findViewById(R.id.tv_proglist_dates);
-			btn_proglist_view = view.findViewById(R.id.btn_proglist_view);
 			program_cardView = view.findViewById(R.id.program_cardview);
 			view.setOnClickListener(this);
 		}

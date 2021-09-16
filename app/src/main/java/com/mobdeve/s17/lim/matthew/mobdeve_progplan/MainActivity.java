@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
 		initOnClick();
 		apiClient = new APIClient();
 		getPrograms();
+		Intent bgmService = new Intent(this, MusicService.class);
+		startService(bgmService);
 //		postAdminReg("admin@gmail.com", "superAdmin", "admin");
 
 	}

@@ -66,8 +66,26 @@ public class EvaluateProgActivity extends AppCompatActivity {
 //			gotoViewIndivProg.putExtras(bundle);
 //			startActivity(gotoViewIndivProg);
 //			finish();
-//			if(validateInput())
+			if(validateInput())
+			{
+				int i;
+				String data = "";
+				data += "Outcomes\n";
 
+				for (i = 0; i < outcomeArrayList.size(); i++)
+				{
+					data += outcomeArrayList.get(i).getOutcomeName() + " " + Integer.toString(outcomeArrayList.get(i).getActualVal()) + "\n";
+				}
+
+				data += "Resources\n";
+
+				for (i = 0; i < resourceArrayList.size(); i++)
+				{
+					data += resourceArrayList.get(i).getResourceName() + " " + Integer.toString(resourceArrayList.get(i).getActualAmt()) + "\n";
+				}
+				data += binding.etComments.getText().toString();
+				Toast.makeText(EvaluateProgActivity.this, data, Toast.LENGTH_LONG).show();
+			}
 		});
 	}
 

@@ -62,15 +62,6 @@
 				app:layout_constraintLeft_toLeftOf="parent"
 			/>
 
-			<androidx.appcompat.widget.AppCompatButton
-				android:id="@+id/btn_proglist_view"
-				android:layout_width="70dp"
-				android:layout_height="40dp"
-				android:text="View"
-				app:layout_constraintBottom_toBottomOf="parent"
-				app:layout_constraintEnd_toEndOf="parent"
-				android:visibility="invisible"
-			/>
 		</androidx.constraintlayout.widget.ConstraintLayout>
 	</LinearLayout>
 </androidx.cardview.widget.CardView>

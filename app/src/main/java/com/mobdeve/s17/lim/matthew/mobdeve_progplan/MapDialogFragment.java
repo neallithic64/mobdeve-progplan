@@ -1,11 +1,18 @@
 package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,6 +29,9 @@ public class MapDialogFragment extends DialogFragment
 
 	GoogleMap mMap;
 	Button 	btn_selectLocation;
+	private Double latitude, longitude;
+	private GpsTracker gpsTracker;
+	Context context;
 	public MapDialogFragment() {
 		// Required empty public constructor
 	}
@@ -45,10 +55,19 @@ public class MapDialogFragment extends DialogFragment
 //	TODO : Make it so the marker that leads to current locations work
 	@Override
 	public void onMapReady(GoogleMap googleMap) {
+		gpsTracker = new GpsTracker(context);
+
+		if(gpsTracker.canGetLocation)
+		{
+			latitude = gpsTracker.getLatitude();
+			longitude = gpsTracker.getLongitude();
+		}else{
+			gpsTracker.showSettingsAlert();
+		}
 		mMap = googleMap;
 		mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-		LatLng latLng = new LatLng(37.7688472,-122.4130859);
+		LatLng latLng = new LatLng(latitude,longitude);
 		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,11));
 
 		MarkerOptions markerOptions = new MarkerOptions();
@@ -57,4 +76,5 @@ public class MapDialogFragment extends DialogFragment
 		markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
 		mMap.addMarker(markerOptions);
 	}
+
 }
