@@ -14,6 +14,7 @@ public class ProgramJS {
 	private ArrayList<Outcome> outcomes;
 	private ArrayList<Resource> resources;
 	private ArrayList<ProgChecklist> checklistItems;
+	private Feedback feedback;
 
 	public ProgramJS(Program program, ArrayList<Outcome> outcomes, ArrayList<Resource> resources) {
 		this.program = program;
@@ -29,6 +30,15 @@ public class ProgramJS {
 		this.checklistItems = checklistItems;
 	}
 
+	public ProgramJS(Program program, ArrayList<Outcome> outcomes, ArrayList<Resource> resources, ArrayList<ProgChecklist> checklistItems, Feedback feedback) {
+		this.program = program;
+		this.outcomes = outcomes;
+		this.resources = resources;
+		this.checklistItems = checklistItems;
+		this.feedback = feedback;
+	}
+
+	public Feedback getFeedback() { return feedback; }
 	public Program getProgram() { return program; }
 	public ArrayList<Outcome> getOutcomes() { return outcomes; }
 	public ArrayList<Resource> getResources() { return resources; }
