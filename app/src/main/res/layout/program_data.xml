@@ -21,7 +21,9 @@
 			android:layout_weight="3"
 			app:egLegendTextSize="18sp"
 			app:egUsePieRotation="true"
-			app:egValueTextSize="20sp"
+			app:egValueTextSize="10sp"
+			app:egAnimationTime="0"
+			app:egUseCustomInnerValue="true"
 			android:layout_marginTop="10dp"/>
 
 		<androidx.constraintlayout.widget.ConstraintLayout

@@ -71,17 +71,17 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 		holder.tv_proglist_dates.setText(formatter.format(programArrayList.get(position).getStartDate()) + " - " +
 				formatter.format(programArrayList.get(position).getEndDate()));
 
-
-		float complete = Float.parseFloat(Integer.toString(programArrayList.get(position).getProgress())+"f");
+		holder.pc_progress.clearChart();
+		float complete = (float) programArrayList.get(position).getProgress();
 		float incomplete = 100f - complete;
-		Toast.makeText(context.getApplicationContext(), Float.toString(incomplete),Toast.LENGTH_SHORT).show();
-		holder.pc_progress.addPieSlice(new PieModel("Incomplete", incomplete, Color.parseColor("#BEBEBE")));
 		holder.pc_progress.addPieSlice(new PieModel("Complete", complete, Color.parseColor("#028A0F")));
+		holder.pc_progress.addPieSlice(new PieModel("Incomplete", incomplete, Color.parseColor("#BEBEBE")));
+		holder.pc_progress.setInnerValueString(String.format("%.0f", complete) + "%");
+		holder.pc_progress.setCurrentItem(1);
 
 //		holder.btn_proglist_view.setOnClickListener(v->{
 //			selected = position;
 //		});
-//
 //		holder.program_cardView.setOnClickListener(v->{
 //			selected = position;
 //		});
