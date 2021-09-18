@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
@@ -18,10 +19,17 @@ import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Feedback;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Outcome;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.ProgChecklist;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.ProgramJS;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Resource;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EvaluateProgActivity extends AppCompatActivity {
 	private ActivityEvaluateProgBinding binding;
@@ -68,23 +76,7 @@ public class EvaluateProgActivity extends AppCompatActivity {
 //			finish();
 			if(validateInput())
 			{
-				int i;
-				String data = "";
-				data += "Outcomes\n";
-
-				for (i = 0; i < outcomeArrayList.size(); i++)
-				{
-					data += outcomeArrayList.get(i).getOutcomeName() + " " + Integer.toString(outcomeArrayList.get(i).getActualVal()) + "\n";
-				}
-
-				data += "Resources\n";
-
-				for (i = 0; i < resourceArrayList.size(); i++)
-				{
-					data += resourceArrayList.get(i).getResourceName() + " " + Integer.toString(resourceArrayList.get(i).getActualAmt()) + "\n";
-				}
-				data += binding.etComments.getText().toString();
-				Toast.makeText(EvaluateProgActivity.this, data, Toast.LENGTH_LONG).show();
+				evaluateProgram();
 			}
 		});
 	}
@@ -264,6 +256,26 @@ public class EvaluateProgActivity extends AppCompatActivity {
 
 	private void evaluateProgram(){
 		feedback = new Feedback("",program.getProgramId(),binding.etComments.getText().toString());
-
+		ProgramJS feedbackinput = new ProgramJS(program,outcomeArrayList,resourceArrayList,null,feedback);
+		Call<ResponseBody> call = apiClient.APIservice.postEvalProgram(feedbackinput);
+		call.enqueue(new Callback<ResponseBody>() {
+			@Override
+			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+				try {
+					if (response.body() != null) {
+						Toast.makeText(EvaluateProgActivity.this, response.body().string(), Toast.LENGTH_LONG).show();
+						if (response.code() == 200)
+							returnToViewProg();
+					}
+					else Toast.makeText(EvaluateProgActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
+				} catch (IOException e) {
+					Log.e("failedEval", e.getMessage());
+				}
+			}
+			@Override
+			public void onFailure(Call<ResponseBody> call, Throwable t) {
+				Log.e("failedEval", t.getMessage());
+			}
+		});
 	}
 }

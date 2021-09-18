@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.apimodels.LoginResponse;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityViewIndivProgBinding;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.APIClient;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Feedback;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Outcome;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.ProgChecklist;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
@@ -37,7 +39,7 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 	private ArrayList<ProgChecklist> progChecklistArrayList;
 	private Program	program;
 	private Bundle bundle;
-
+	private Feedback feedback;
 	private APIClient apiClient;
 
 	@Override
@@ -233,6 +235,14 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 		loadResources();
 		loadOutcomes();
 
+		if(feedback != null){
+			Toast.makeText(ViewIndivProgActivity.this,feedback.getComments(),Toast.LENGTH_SHORT).show();
+			binding.btnEvaluate.setVisibility(View.INVISIBLE);
+			binding.btnEdit.setVisibility(View.INVISIBLE);
+			binding.tvComments.setVisibility(View.VISIBLE);
+			binding.tvCommentsval.setVisibility(View.VISIBLE);
+			binding.tvCommentsval.setText(feedback.getComments());
+		}
 		binding.tvProgName.setText(program.getProgramTitle());
 		binding.tvDateRange.setText(formatter.format(program.getStartDate()) + " - " +
 				formatter.format(program.getEndDate()));
@@ -243,6 +253,7 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 		outcomeArrayList = new ArrayList<>();
 		resourceArrayList = new ArrayList<>();
 		progChecklistArrayList = new ArrayList<>();
+
 		Log.d("Testing","Entered getProgramDetails");
 		Call<ProgramJS> call = apiClient.APIservice.getProgramDetails(program.getProgramId());
 		call.enqueue(new Callback<ProgramJS>() {
@@ -254,9 +265,11 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 						resourceArrayList = (ArrayList<Resource>) response.body().getResources();
 						progChecklistArrayList = (ArrayList<ProgChecklist>) response.body().getChecklist();
 						program = (Program) response.body().getProgram();
+//						feedback = (Feedback) response.body().getFeedback();
 
+//						Toast.makeText(ViewIndivProgActivity.this,feedback.toString(),Toast.LENGTH_SHORT).show();
 						updateUI();
-						Log.d("TestingGetProgDetails", response.body().toString());
+//						Log.d("TestingGetProgDetails", response.body().toString());
 					} else Toast.makeText(ViewIndivProgActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
 				} catch (IOException e) {
 					Log.e("failedGetDetails", e.getMessage());

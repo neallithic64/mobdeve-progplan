@@ -277,7 +277,7 @@ public class CreateProgActivity extends AppCompatActivity {
 				try {
 					if (response.body() != null) {
 						Toast.makeText(CreateProgActivity.this, response.body().string(), Toast.LENGTH_LONG).show();
-						if (response.body().string().equals("Program created!"))
+						if (response.code() == 200)
 							finish();
 					}
 					else Toast.makeText(CreateProgActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();

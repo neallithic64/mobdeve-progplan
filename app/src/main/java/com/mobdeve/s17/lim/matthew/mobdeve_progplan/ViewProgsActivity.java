@@ -25,7 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ViewProgsActivity extends AppCompatActivity {
+public class ViewProgsActivity extends AppCompatActivity implements FilterDialogFragment.FilterDialogListener {
 
 	private ActivityViewProgsBinding 	binding;
 	private ArrayList<Program>			programArrayList;
@@ -65,7 +65,7 @@ public class ViewProgsActivity extends AppCompatActivity {
 		super.onResume();
 		position = -1;
 //		Toast.makeText(ViewProgsActivity.this,bundle.getString("email"),Toast.LENGTH_LONG).show();
-		getPrograms();
+//		getPrograms();
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -144,5 +144,26 @@ public class ViewProgsActivity extends AppCompatActivity {
 //				Toast.makeText(ViewProgsActivity.this,programArrayList.get(pos).getProgramId(),Toast.LENGTH_LONG).show();
 			}
 		};
+	}
+
+	public void filterPrograms(Date startDate, Date endDate, String city){
+
+		programArrayList = new ArrayList<Program>();
+		Call<List<Program>> call = apiClient.APIservice.getFilterPrograms(city);
+		call.enqueue(new Callback<List<Program>>() {
+			@Override
+			public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
+				String msg = "";
+
+				programArrayList = (ArrayList<Program>) response.body();
+				programAdapter.changeDataSet(programArrayList);
+//				Toast.makeText(ViewProgsActivity.this,Integer.toString(programArrayList.size()) , Toast.LENGTH_LONG).show();
+
+			}
+			@Override
+			public void onFailure(Call<List<Program>> call, Throwable t) {
+				Log.e("failedGetPrograms", t.getMessage());
+			}
+		});
 	}
 }

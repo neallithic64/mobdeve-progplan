@@ -69,6 +69,7 @@
 			app:layout_constraintTop_toBottomOf="@id/tv_date_range"
 			app:layout_constraintLeft_toLeftOf="parent"
 			android:layout_marginLeft="5dp"
+			android:focusable="false"
 			/>
 
 		<EditText
@@ -81,6 +82,7 @@
 			app:layout_constraintTop_toBottomOf="@id/tv_date_range"
 			app:layout_constraintRight_toRightOf="parent"
 			android:layout_marginRight="5dp"
+			android:focusable="false"
 			/>
 
 		<androidx.appcompat.widget.AppCompatButton

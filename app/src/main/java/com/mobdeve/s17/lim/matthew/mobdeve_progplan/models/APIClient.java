@@ -10,6 +10,7 @@ import com.mobdeve.s17.lim.matthew.mobdeve_progplan.apimodels.UpdateJS;
 import java.text.DateFormat;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -49,6 +50,9 @@ public class APIClient {
 		@GET("/api/progp/progs")
 		Call<List<Program>> getPrograms();
 
+		@GET("/api/progp/progs")
+		Call<List<Program>> getFilterPrograms(@Query("city") String city);
+
 		@POST("/api/progp/adminreg")
 		Call<ResponseBody> postAdminReg(@Body Admin admin);
 
@@ -62,7 +66,7 @@ public class APIClient {
 		Call<ResponseBody> postCreateProgram(@Body ProgramJS program);
 
 		@POST("/api/progp/progeval")
-		Call<ResponseBody> postEvalProgram(@Body Feedback feedback);
+		Call<ResponseBody> postEvalProgram(@Body ProgramJS feedback);
 
 		@POST("/api/progp/progchkl")
 		Call<ResponseBody> postUpdateChecklist(@Body ArrayList<ProgChecklist> checklist);
