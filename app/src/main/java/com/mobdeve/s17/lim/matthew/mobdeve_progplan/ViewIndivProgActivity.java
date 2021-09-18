@@ -114,38 +114,84 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 		int i;
 
 		binding.tlOutcomes.removeViews(1, binding.tlOutcomes.getChildCount() - 1);
-
 		i = 0;
-		while (i < outcomeArrayList.size())
-		{
-			TableRow newRow = new TableRow(this);
-			TextView name = new TextView(this);
-			TextView expectedval = new TextView(this);
+		if(feedback != null){
+			while (i < outcomeArrayList.size())
+			{
+				TableRow newRow = new TableRow(this);
+				TextView name = new TextView(this);
+				TextView expectedval = new TextView(this);
+				TextView actualval = new TextView(this);
 
 
-			name.setText(outcomeArrayList.get(i).getOutcomeName());
-			name.setBackground(getDrawable(R.drawable.border));
-			name.setLayoutParams(new TableRow.LayoutParams(
-					0,
-					TableRow.LayoutParams.MATCH_PARENT,
-					0.7f));
+				name.setText(outcomeArrayList.get(i).getOutcomeName());
+				name.setBackground(getDrawable(R.drawable.border));
+				name.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.5f));
+	//			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+				name.setTextColor(getColor(R.color.black));
+				newRow.addView(name);
+
+				expectedval.setText(Integer.toString(outcomeArrayList.get(i).getExpectedVal()));
+				expectedval.setBackground(getDrawable(R.drawable.border));
+				expectedval.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.25f));
+	//			expectedval.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+				expectedval.setTextColor(getColor(R.color.black));
+				newRow.addView(expectedval);
+
+				actualval.setBackground(getDrawable(R.drawable.border));
+				actualval.setTextSize(12);
+				actualval.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.25f));
+				actualval.setText(outcomeArrayList.get(i).getActualVal());
+				actualval.setTextColor(getColor(R.color.black));
+				// The specified child already has a parent. You must call removeView() on the child's parent first.
+				newRow.addView(actualval);
+
+				binding.tlOutcomes.addView(newRow);
+
+				i++;
+			}
+		}
+		else{
+			while (i < outcomeArrayList.size())
+			{
+				TableRow newRow = new TableRow(this);
+				TextView name = new TextView(this);
+				TextView expectedval = new TextView(this);
+
+
+				name.setText(outcomeArrayList.get(i).getOutcomeName());
+				name.setBackground(getDrawable(R.drawable.border));
+				name.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.7f));
 //			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-			name.setTextColor(getColor(R.color.black));
-			newRow.addView(name);
+				name.setTextColor(getColor(R.color.black));
+				newRow.addView(name);
 
-			expectedval.setText(Integer.toString(outcomeArrayList.get(i).getExpectedVal()));
-			expectedval.setBackground(getDrawable(R.drawable.border));
-			expectedval.setLayoutParams(new TableRow.LayoutParams(
-					0,
-					TableRow.LayoutParams.MATCH_PARENT,
-					0.3f));
+				expectedval.setText(Integer.toString(outcomeArrayList.get(i).getExpectedVal()));
+				expectedval.setBackground(getDrawable(R.drawable.border));
+				expectedval.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.3f));
 //			expectedval.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-			expectedval.setTextColor(getColor(R.color.black));
-			newRow.addView(expectedval);
+				expectedval.setTextColor(getColor(R.color.black));
+				newRow.addView(expectedval);
 
-			binding.tlOutcomes.addView(newRow);
+				binding.tlOutcomes.addView(newRow);
 
-			i++;
+				i++;
+			}
 		}
 	}
 
@@ -154,37 +200,84 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 
 		binding.tlResources.removeViews(1, binding.tlResources.getChildCount() - 1);
 
-		while (i < resourceArrayList.size())
-		{
-			TableRow newRow = new TableRow(this);
-			TextView name = new TextView(this);
-			TextView expectedval = new TextView(this);
+		if(feedback != null){
+			while (i < resourceArrayList.size())
+			{
+				TableRow newRow = new TableRow(this);
+				TextView name = new TextView(this);
+				TextView expectedval = new TextView(this);
+				TextView actualval = new TextView(this);
 
+				name.setText(resourceArrayList.get(i).getResourceName());
+				name.setBackground(getDrawable(R.drawable.border));
+				name.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.5f));
+	//			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+				name.setTextColor(getColor(R.color.black));
+				newRow.addView(name);
 
-			name.setText(resourceArrayList.get(i).getResourceName());
-			name.setBackground(getDrawable(R.drawable.border));
-			name.setLayoutParams(new TableRow.LayoutParams(
-					0,
-					TableRow.LayoutParams.MATCH_PARENT,
-					0.7f));
-//			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-			name.setTextColor(getColor(R.color.black));
-			newRow.addView(name);
+				expectedval.setText(Integer.toString(resourceArrayList.get(i).getExpectedAmt()));
+				expectedval.setBackground(getDrawable(R.drawable.border));
+				expectedval.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.25f));
+	//			expectedval.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+				expectedval.setTextColor(getColor(R.color.black));
+				newRow.addView(expectedval);
 
-			expectedval.setText(Integer.toString(resourceArrayList.get(i).getExpectedAmt()));
-			expectedval.setBackground(getDrawable(R.drawable.border));
-			expectedval.setLayoutParams(new TableRow.LayoutParams(
-					0,
-					TableRow.LayoutParams.MATCH_PARENT,
-					0.3f));
-//			expectedval.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-			expectedval.setTextColor(getColor(R.color.black));
-			newRow.addView(expectedval);
+				actualval.setBackground(getDrawable(R.drawable.border));
+				actualval.setTextSize(12);
+				actualval.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.25f));
+				actualval.setText(Integer.toString(resourceArrayList.get(i).getActualAmt()));
+				actualval.setTextColor(getColor(R.color.black));
+				// The specified child already has a parent. You must call removeView() on the child's parent first.
+				newRow.addView(actualval);
 
-			binding.tlResources.addView(newRow);
+				binding.tlResources.addView(newRow);
 
-			i++;
+				i++;
+			}
 		}
+		else{
+			while (i < resourceArrayList.size())
+			{
+				TableRow newRow = new TableRow(this);
+				TextView name = new TextView(this);
+				TextView expectedval = new TextView(this);
+
+
+				name.setText(resourceArrayList.get(i).getResourceName());
+				name.setBackground(getDrawable(R.drawable.border));
+				name.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.7f));
+//			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+				name.setTextColor(getColor(R.color.black));
+				newRow.addView(name);
+
+				expectedval.setText(Integer.toString(resourceArrayList.get(i).getExpectedAmt()));
+				expectedval.setBackground(getDrawable(R.drawable.border));
+				expectedval.setLayoutParams(new TableRow.LayoutParams(
+						0,
+						TableRow.LayoutParams.MATCH_PARENT,
+						0.3f));
+//			expectedval.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+				expectedval.setTextColor(getColor(R.color.black));
+				newRow.addView(expectedval);
+
+				binding.tlResources.addView(newRow);
+
+				i++;
+			}
+		}
+
 	}
 
 	private void loadChecklist(){
@@ -266,7 +359,7 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 						progChecklistArrayList = (ArrayList<ProgChecklist>) response.body().getChecklist();
 						program = (Program) response.body().getProgram();
 						feedback = (Feedback) response.body().getFeedback();
-						
+
 						updateUI();
 //						Log.d("TestingGetProgDetails", response.body().toString());
 					} else Toast.makeText(ViewIndivProgActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
