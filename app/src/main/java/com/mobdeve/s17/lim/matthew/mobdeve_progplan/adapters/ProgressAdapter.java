@@ -47,7 +47,9 @@ public class ProgressAdapter extends RecyclerView.Adapter<ProgressAdapter.Progre
 	public void onBindViewHolder(ProgressAdapter.ProgressViewHolder holder, int position) {
 		holder.tv_progressitem.setText(progChecklistArrayList.get(position).getProgItem());
 		holder.checkbox_checked.setChecked(progChecklistArrayList.get(position).isChecked());
-
+		if (progChecklistArrayList.get(position).isChecked()){
+			holder.checkbox_checked.setEnabled(false);
+		}
 		holder.checkbox_checked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				//set your object's last status

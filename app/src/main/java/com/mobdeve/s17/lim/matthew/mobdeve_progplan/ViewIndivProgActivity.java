@@ -265,9 +265,8 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 						resourceArrayList = (ArrayList<Resource>) response.body().getResources();
 						progChecklistArrayList = (ArrayList<ProgChecklist>) response.body().getChecklist();
 						program = (Program) response.body().getProgram();
-//						feedback = (Feedback) response.body().getFeedback();
-
-//						Toast.makeText(ViewIndivProgActivity.this,feedback.toString(),Toast.LENGTH_SHORT).show();
+						feedback = (Feedback) response.body().getFeedback();
+						
 						updateUI();
 //						Log.d("TestingGetProgDetails", response.body().toString());
 					} else Toast.makeText(ViewIndivProgActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();

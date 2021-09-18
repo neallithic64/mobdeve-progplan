@@ -65,6 +65,9 @@ public class APIClient {
 		@POST("/api/progp/progadd")
 		Call<ResponseBody> postCreateProgram(@Body ProgramJS program);
 
+		@POST("/api/progp/progedit")
+		Call<ResponseBody> postEditProgram(@Body Program program);
+
 		@POST("/api/progp/progeval")
 		Call<ResponseBody> postEvalProgram(@Body ProgramJS feedback);
 

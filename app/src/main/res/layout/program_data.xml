@@ -13,13 +13,16 @@
 		android:orientation="horizontal"
 		android:weightSum="10">
 
-		<ImageView
-			android:id="@+id/iv_proglist_progress"
+		<org.eazegraph.lib.charts.PieChart
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+			android:id="@+id/pc_progresschart"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_weight="3"
-			app:srcCompat="@android:drawable/ic_lock_lock"
-		/>
+			app:egLegendTextSize="18sp"
+			app:egUsePieRotation="true"
+			app:egValueTextSize="20sp"
+			android:layout_marginTop="10dp"/>
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 			android:layout_width="0dp"

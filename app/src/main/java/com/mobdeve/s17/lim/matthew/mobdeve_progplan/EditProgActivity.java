@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
@@ -12,11 +13,18 @@ import com.mobdeve.s17.lim.matthew.mobdeve_progplan.databinding.ActivityEditProg
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.APIClient;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Feedback;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
+import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.ProgramJS;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditProgActivity extends AppCompatActivity {
 
@@ -56,6 +64,7 @@ public class EditProgActivity extends AppCompatActivity {
 //      TODO : Save changes to database
 			if(validateInput()){
 				modifyProgramVal();
+				editProgram();
 			}
 		});
 
@@ -139,9 +148,30 @@ public class EditProgActivity extends AppCompatActivity {
 		program.setStreet(binding.etLocation.getText().toString().substring(0,commaplacement));
 		program.setCity(binding.etLocation.getText().toString().substring(commaplacement + 2));
 
-		Toast.makeText(this, program.getStreet() + "\n" + program.getCity(), Toast.LENGTH_SHORT).show();
+//		Toast.makeText(this, program.getStreet() + "\n" + program.getCity(), Toast.LENGTH_SHORT).show();
 	}
+
 	private void editProgram(){
 
+		Call<ResponseBody> call = apiClient.APIservice.postEditProgram(program);
+		call.enqueue(new Callback<ResponseBody>() {
+			@Override
+			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+				try {
+					if (response.body() != null) {
+						Toast.makeText(EditProgActivity.this, response.body().string(), Toast.LENGTH_LONG).show();
+						if (response.code() == 200)
+							returnToViewProg();
+					}
+					else Toast.makeText(EditProgActivity.this, response.errorBody().string(), Toast.LENGTH_LONG).show();
+				} catch (IOException e) {
+					Log.e("failedEditProg", e.getMessage());
+				}
+			}
+			@Override
+			public void onFailure(Call<ResponseBody> call, Throwable t) {
+				Log.e("failedEditProg", t.getMessage());
+			}
+		});
 	}
 }

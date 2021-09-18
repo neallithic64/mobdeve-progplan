@@ -65,7 +65,7 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 		super.onResume();
 		position = -1;
 //		Toast.makeText(ViewProgsActivity.this,bundle.getString("email"),Toast.LENGTH_LONG).show();
-//		getPrograms();
+		getPrograms();
 	}
 
 	public boolean onCreateOptionsMenu(Menu menu) {

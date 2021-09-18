@@ -2,12 +2,14 @@ package com.mobdeve.s17.lim.matthew.mobdeve_progplan.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +22,8 @@ import com.mobdeve.s17.lim.matthew.mobdeve_progplan.ViewIndivProgActivity;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.ViewProgsActivity;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
 
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
@@ -66,6 +70,14 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 		holder.tv_proglist_location.setText(programArrayList.get(position).getCity());
 		holder.tv_proglist_dates.setText(formatter.format(programArrayList.get(position).getStartDate()) + " - " +
 				formatter.format(programArrayList.get(position).getEndDate()));
+
+
+		float complete = Float.parseFloat(Integer.toString(programArrayList.get(position).getProgress())+"f");
+		float incomplete = 100f - complete;
+		Toast.makeText(context.getApplicationContext(), Float.toString(incomplete),Toast.LENGTH_SHORT).show();
+		holder.pc_progress.addPieSlice(new PieModel("Incomplete", incomplete, Color.parseColor("#BEBEBE")));
+		holder.pc_progress.addPieSlice(new PieModel("Complete", complete, Color.parseColor("#028A0F")));
+
 //		holder.btn_proglist_view.setOnClickListener(v->{
 //			selected = position;
 //		});
@@ -76,14 +88,15 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ProgramV
 	}
 
 	protected class ProgramViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-		ImageView		iv_proglist_progress;
 		TextView 		tv_proglist_name;
 		TextView 		tv_proglist_location;
 		TextView 		tv_proglist_dates;
 		CardView		program_cardView;
+		PieChart		pc_progress;
+
 		public ProgramViewHolder(View view){
 			super(view);
-			iv_proglist_progress = view.findViewById(R.id.iv_proglist_progress);
+			pc_progress = view.findViewById(R.id.pc_progresschart);
 			tv_proglist_name = view.findViewById(R.id.tv_proglist_name);
 			tv_proglist_location = view.findViewById(R.id.tv_proglist_location);
 			tv_proglist_dates = view.findViewById(R.id.tv_proglist_dates);
