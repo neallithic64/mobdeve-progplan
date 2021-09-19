@@ -203,7 +203,6 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 	public void getNotifs(){
 		int i = 0;
 		Date date = new Date();
-		Toast.makeText(getApplicationContext(),date.toString(),Toast.LENGTH_LONG).show();
 
 		for(i = 0; i < programArrayList.size(); i++){
 			if(programArrayList.get(i).getStatus().equals("Needs Evaluation"))

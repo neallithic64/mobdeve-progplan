@@ -1,7 +1,9 @@
 package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -55,7 +57,8 @@ public class CreateProgActivity extends AppCompatActivity {
 	private void initOnClick() {
 		binding.ivGps.setOnClickListener(v -> {
 			// TODO: implement the modal for the maps
-			new MapDialogFragment().show(getSupportFragmentManager(), null);
+			Intent gotoMapActivity = new Intent(CreateProgActivity.this, MapsActivity.class);
+			startActivityForResult(gotoMapActivity, 800);
 		});
 
 		binding.ivAddResource.setOnClickListener(v -> {
@@ -260,6 +263,15 @@ public class CreateProgActivity extends AppCompatActivity {
 
 		}
 		return true;
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == Activity.RESULT_OK && requestCode == 800){
+			Bundle locbundle = data.getExtras();
+			binding.etLocation.setText(locbundle.getString("locationinput"));
+		}
 	}
 
 	private void postCreateProgram(String programTitle, Date startDate, Date endDate, String street, String city) {

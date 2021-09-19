@@ -23,6 +23,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -45,8 +46,8 @@ public class MapsActivity extends FragmentActivity
 	private static final int LOCATION_MIN_UPDATE_TIME = 10;
 	private static final int LOCATION_MIN_UPDATE_DISTANCE = 1000;
 	private Location location = null;
-
 	private LatLng markerLoc;
+	private LatLng defaultLoc;
 
 	private LocationListener locationListener = new LocationListener() {
 		@Override
@@ -82,23 +83,37 @@ public class MapsActivity extends FragmentActivity
 		binding.btnSelectLocation.setOnClickListener(v -> {
 			Geocoder geocoder = new Geocoder(this);
 			List<Address> listAddr;
+//			Toast.makeText(getApplicationContext(),markerLoc.toString(),Toast.LENGTH_LONG).show();
 			try {
 				listAddr = geocoder.getFromLocation(markerLoc.latitude, markerLoc.longitude, 1);
 				String locName = "";
 				if (listAddr != null && listAddr.size() > 0) {
 					Address addr = listAddr.get(0);
-					locName += addr.getLocality() + " " + addr.getPostalCode();
+					String city = addr.getLocality();
+					if(city.indexOf("City of") != -1)
+						city = city.substring(city.indexOf("City of ") + 7);
+					locName += addr.getThoroughfare() + ", " + city + " City";
+//					Toast.makeText(getApplicationContext(),locName,Toast.LENGTH_LONG).show();
 				}
 				// not sure if this should be put here
 				Intent data = new Intent();
-				data.putExtra("vendor", locName);
+
+				Bundle bundleloc = new Bundle();
+				bundleloc.putString("locationinput", locName);
+				bundleloc.getString("locationinput");
+
+				Toast.makeText(getApplicationContext(),locName, Toast.LENGTH_LONG).show();
+
+				data.putExtras(bundleloc);
 				setResult(RESULT_OK, data);
+
 				finish();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		});
 	}
+
 
 	/**
 	 * Manipulates the map once available.
@@ -132,30 +147,61 @@ public class MapsActivity extends FragmentActivity
 				.position(loc)
 				.title("Location")
 				.draggable(true)
-				.snippet("Hello")
+				.snippet("Set Location here")
 				.icon(BitmapDescriptorFactory
 						.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
 		mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
 
-		mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+		markerLoc = loc;
+
+//		mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+//			@Override
+//			public void onMarkerDragStart(Marker marker) {
+//				// drag start
+//			}
+//			@Override
+//			public void onMarkerDrag(Marker marker) {
+//				// drag
+//			}
+//			@Override
+//			public void onMarkerDragEnd(Marker marker) {
+//				// drag end
+//				markerLoc = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
+//
+//			}
+//		});
+
+		mMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener() {
 			@Override
-			public void onMarkerDragStart(Marker marker) {
-				// drag start
+			public void onCameraMoveStarted(int i) {
+//				mDragTimer.start();
+//				mTimerIsRunning = true;
+				Log.d("Map", "user is moving map");
 			}
+		});
+
+		mMap.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
 			@Override
-			public void onMarkerDrag(Marker marker) {
-				// drag
-			}
-			@Override
-			public void onMarkerDragEnd(Marker marker) {
-				// drag end
-				Toast.makeText(getApplicationContext(),
-						"Lat " + mMap.getMyLocation().getLatitude() + " || Lng " + mMap.getMyLocation().getLongitude(),
-						Toast.LENGTH_LONG).show();
-				markerLoc = new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude());
+			public void onCameraIdle() {
+				// Cleaning all the markers.
+				if (mMap != null) {
+					mMap.clear();
+				}
+
+				markerLoc = mMap.getCameraPosition().target;
+
+				mMap.addMarker(new MarkerOptions()
+						.position(markerLoc)
+						.title("Location")
+						.draggable(true)
+						.snippet("Set Location here")
+						.icon(BitmapDescriptorFactory
+								.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+
 			}
 		});
 	}
+
 
 	@Override
 	public boolean onMyLocationButtonClick() {

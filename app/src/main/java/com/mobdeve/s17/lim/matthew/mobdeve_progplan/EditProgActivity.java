@@ -1,7 +1,9 @@
 package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -69,7 +71,8 @@ public class EditProgActivity extends AppCompatActivity {
 		});
 
 		binding.ivGps.setOnClickListener(v->{
-			new MapDialogFragment().show(getSupportFragmentManager(), null);
+			Intent gotoMapActivity = new Intent(EditProgActivity.this, MapsActivity.class);
+			startActivityForResult(gotoMapActivity, 800);
 		});
 
 		binding.etDateRange1.setOnClickListener(v->{
@@ -173,5 +176,14 @@ public class EditProgActivity extends AppCompatActivity {
 				Log.e("failedEditProg", t.getMessage());
 			}
 		});
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == Activity.RESULT_OK && requestCode == 800){
+			Bundle locbundle = data.getExtras();
+			binding.etLocation.setText(locbundle.getString("locationinput"));
+		}
 	}
 }

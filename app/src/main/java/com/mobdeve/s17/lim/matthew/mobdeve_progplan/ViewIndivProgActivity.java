@@ -411,7 +411,6 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 		loadOutcomes();
 
 		if(feedback != null){
-			Toast.makeText(ViewIndivProgActivity.this,feedback.getComments(),Toast.LENGTH_SHORT).show();
 			binding.btnEvaluate.setVisibility(View.INVISIBLE);
 			binding.btnEdit.setVisibility(View.INVISIBLE);
 			binding.tvComments.setVisibility(View.VISIBLE);
