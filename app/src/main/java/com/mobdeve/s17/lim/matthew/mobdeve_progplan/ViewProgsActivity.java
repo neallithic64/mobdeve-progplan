@@ -168,12 +168,14 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 
 				for(int i = 0; i < programArrayList.size(); i++) {
 					if (programArrayList.get(i).getCity().indexOf(city) == -1 ||
-							false)
+							!inDateRange(startDate,endDate,programArrayList.get(i).getStartDate(),
+									programArrayList.get(i).getEndDate()))
 					{
 						programArrayList.remove(i);
 						i--;
 					}
 				}
+				programAdapter.changeDataSet(programArrayList);
 				Toast.makeText(ViewProgsActivity.this, Integer.toString(programArrayList.size()), Toast.LENGTH_LONG).show();
 			}
 			@Override
@@ -181,5 +183,9 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 				Log.e("failedGetPrograms", t.getMessage());
 			}
 		});
+	}
+
+	public boolean inDateRange(Date startRange, Date endRange, Date startDate, Date endDate){
+		return (startRange.before(endDate) || startRange.equals(endDate)) && (startDate.before(endRange) || startDate.equals(endRange));
 	}
 }

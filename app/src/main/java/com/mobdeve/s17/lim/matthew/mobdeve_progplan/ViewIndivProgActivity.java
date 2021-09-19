@@ -418,6 +418,10 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 			binding.tvCommentsval.setVisibility(View.VISIBLE);
 			binding.tvCommentsval.setText(feedback.getComments());
 		}
+
+		if(program.getStatus().equalsIgnoreCase("Complete"))
+			binding.btnUpdate.setVisibility(View.INVISIBLE);
+
 		binding.tvProgName.setText(program.getProgramTitle());
 		binding.tvDateRange.setText(formatter.format(program.getStartDate()) + " - " +
 				formatter.format(program.getEndDate()));
