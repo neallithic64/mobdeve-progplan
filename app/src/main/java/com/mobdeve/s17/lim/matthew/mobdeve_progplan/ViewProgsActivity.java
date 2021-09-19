@@ -187,7 +187,7 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 					}
 				}
 				programAdapter.changeDataSet(programArrayList);
-				Toast.makeText(ViewProgsActivity.this, Integer.toString(programArrayList.size()), Toast.LENGTH_LONG).show();
+//				Toast.makeText(ViewProgsActivity.this, Integer.toString(programArrayList.size()), Toast.LENGTH_LONG).show();
 			}
 			@Override
 			public void onFailure(Call<List<Program>> call, Throwable t) {

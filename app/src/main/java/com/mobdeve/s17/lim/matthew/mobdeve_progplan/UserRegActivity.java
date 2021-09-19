@@ -101,7 +101,7 @@ public class UserRegActivity extends AppCompatActivity{
 			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 				try {
 					if (response.body() != null)
-						if(response.body().string().equals(""))
+						if(response.code() == 200)
 							Toast.makeText(UserRegActivity.this, "User successfully added", Toast.LENGTH_LONG).show();
 						else
 							Toast.makeText(UserRegActivity.this, response.body().string(), Toast.LENGTH_LONG).show();
