@@ -1,9 +1,15 @@
 package com.mobdeve.s17.lim.matthew.mobdeve_progplan;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +24,7 @@ import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.APIClient;
 import com.mobdeve.s17.lim.matthew.mobdeve_progplan.models.Program;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +44,9 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 	private Menu menu;
 
 	private APIClient apiClient;
+
+	private static final String CHANNEL_ID = "com.mobdeve.s17.lim.matthew.mobdeve_progplan.NOTIFICATION";
+	private int notificationID = 10;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,11 +60,12 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 
 		setOnClickListener();
 //		initializeProgramData();
+		programArrayList = new ArrayList<>();
 
-		getPrograms();
 		programAdapter = new ProgramAdapter(programArrayList,getApplicationContext(),listener);
 		binding.rvProglist.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 		binding.rvProglist.setAdapter(programAdapter);
+
 
 
 		initOnClick();
@@ -124,8 +135,8 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 
 				programArrayList = (ArrayList<Program>) response.body();
 				programAdapter.changeDataSet(programArrayList);
+				getNotifs();
 //				Toast.makeText(ViewProgsActivity.this,Integer.toString(programArrayList.size()) , Toast.LENGTH_LONG).show();
-
 			}
 			@Override
 			public void onFailure(Call<List<Program>> call, Throwable t) {
@@ -187,5 +198,89 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 
 	public boolean inDateRange(Date startRange, Date endRange, Date startDate, Date endDate){
 		return (startRange.before(endDate) || startRange.equals(endDate)) && (startDate.before(endRange) || startDate.equals(endRange));
+	}
+
+	public void getNotifs(){
+		int i = 0;
+		Date date = new Date();
+		Toast.makeText(getApplicationContext(),date.toString(),Toast.LENGTH_LONG).show();
+
+		for(i = 0; i < programArrayList.size(); i++){
+			if(programArrayList.get(i).getStatus().equals("Needs Evaluation"))
+			{
+//				Toast.makeText(getApplicationContext(),"implNotif: " + programArrayList.get(i).getProgramTitle(), Toast.LENGTH_LONG).show();
+				evalNotif(programArrayList.get(i).getProgramTitle());
+
+			}
+		}
+
+		for(i = 0; i < programArrayList.size(); i++){
+			if (programArrayList.get(i).getStartDate().getMonth() == date.getMonth() &&
+					programArrayList.get(i).getStartDate().getYear() == date.getYear() &&
+					programArrayList.get(i).getStartDate().getDate() == date.getDate() + 1 &&
+					!programArrayList.get(i).getStatus().equalsIgnoreCase("Complete") &&
+					!programArrayList.get(i).getStatus().equalsIgnoreCase("Needs Evaluation"))
+			{
+//				Toast.makeText(getApplicationContext(),"implNotif: " + programArrayList.get(i).getProgramTitle(), Toast.LENGTH_LONG).show();
+				implNotif(programArrayList.get(i).getProgramTitle());
+			}
+		}
+
+	}
+
+	private void implNotif(String programTitle){
+		createNotificationChannel();
+		createImplNotif(programTitle);
+	}
+
+	private void evalNotif(String programTitle){
+		createNotificationChannel();
+		createEvalNotif(programTitle);
+	}
+	private void createNotificationChannel() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+			int importance = NotificationManager.IMPORTANCE_DEFAULT;
+			NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "ProgPlan", importance);
+			channel.setDescription("MOBDEVE ProgPlan");
+
+			NotificationManager notificationManager = getSystemService(NotificationManager.class);
+			notificationManager.createNotificationChannel(channel);
+
+			Log.d("CreateNotifChannel","createNotificationChannel");
+		}
+	}
+
+	public void createImplNotif(String programTitle){
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+
+		builder.setSmallIcon(R.drawable.logosmall);
+		builder.setContentTitle("You have an upcoming program!");
+		builder.setContentText(programTitle + " starts tomorrow");
+		builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+		builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.logolarge));
+		builder.setAutoCancel(true);
+
+		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+		notificationManager.notify(notificationID, builder.build());
+		notificationID++;
+		Log.d("ImplNotif","ImplementationNotif Created");
+	}
+
+	public void createEvalNotif(String programTitle){
+		NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
+
+		builder.setSmallIcon(R.drawable.logosmall);
+		builder.setContentTitle("You have a pending evaluation!");
+		builder.setContentText(programTitle + " needs to be evaluated.");
+		builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+		builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.logolarge));
+		builder.setAutoCancel(true);
+
+		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplicationContext());
+		notificationManager.notify(notificationID, builder.build());
+		notificationID++;
+		Log.d("EvalNotif","EvaluationNotif Created");
 	}
 }
