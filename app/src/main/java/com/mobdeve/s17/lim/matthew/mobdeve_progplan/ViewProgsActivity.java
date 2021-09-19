@@ -146,10 +146,18 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 		};
 	}
 
+	/*
+	* 	Filters programs based on the following parameters
+	* 		- date of activity falls within the date range
+	* 			-
+	* 		- city matches the city of the program
+	* 			- if city is empty, all programs will pass
+	* */
 	public void filterPrograms(Date startDate, Date endDate, String city){
 
 		programArrayList = new ArrayList<Program>();
-		Call<List<Program>> call = apiClient.APIservice.getFilterPrograms(city);
+		Call<List<Program>> call = apiClient.APIservice.getPrograms();
+
 		call.enqueue(new Callback<List<Program>>() {
 			@Override
 			public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
@@ -157,8 +165,16 @@ public class ViewProgsActivity extends AppCompatActivity implements FilterDialog
 
 				programArrayList = (ArrayList<Program>) response.body();
 				programAdapter.changeDataSet(programArrayList);
-//				Toast.makeText(ViewProgsActivity.this,Integer.toString(programArrayList.size()) , Toast.LENGTH_LONG).show();
 
+				for(int i = 0; i < programArrayList.size(); i++) {
+					if (programArrayList.get(i).getCity().indexOf(city) == -1 ||
+							false)
+					{
+						programArrayList.remove(i);
+						i--;
+					}
+				}
+				Toast.makeText(ViewProgsActivity.this, Integer.toString(programArrayList.size()), Toast.LENGTH_LONG).show();
 			}
 			@Override
 			public void onFailure(Call<List<Program>> call, Throwable t) {

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -116,12 +117,53 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 		binding.tlOutcomes.removeViews(1, binding.tlOutcomes.getChildCount() - 1);
 		i = 0;
 		if(feedback != null){
+			binding.tlOutcomes.removeView(binding.tlOutcomes.getChildAt(0));
+			TableRow newRow = new TableRow(this);
+			TextView name = new TextView(this);
+			TextView expectedval = new TextView(this);
+			TextView actualval = new TextView(this);
+
+			name.setText("Outcome Name");
+			name.setBackground(getDrawable(R.drawable.border));
+			name.setLayoutParams(new TableRow.LayoutParams(
+					0,
+					TableRow.LayoutParams.MATCH_PARENT,
+					0.5f));
+			//			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+			name.setTextColor(getColor(R.color.black));
+			name.setTypeface(null, Typeface.BOLD);
+			newRow.addView(name);
+
+			expectedval.setText("Expected Value");
+			expectedval.setBackground(getDrawable(R.drawable.border));
+			expectedval.setLayoutParams(new TableRow.LayoutParams(
+					0,
+					TableRow.LayoutParams.MATCH_PARENT,
+					0.25f));
+			//expectedval.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+			expectedval.setTextColor(getColor(R.color.black));
+			expectedval.setTypeface(null, Typeface.BOLD);
+			newRow.addView(expectedval);
+
+			actualval.setBackground(getDrawable(R.drawable.border));
+			actualval.setLayoutParams(new TableRow.LayoutParams(
+					0,
+					TableRow.LayoutParams.MATCH_PARENT,
+					0.25f));
+			actualval.setText("Actual Value");
+			actualval.setTextColor(getColor(R.color.black));
+			actualval.setTypeface(null,Typeface.BOLD);
+			newRow.addView(actualval);
+
+			binding.tlOutcomes.addView(newRow);
+
 			while (i < outcomeArrayList.size())
 			{
-				TableRow newRow = new TableRow(this);
-				TextView name = new TextView(this);
-				TextView expectedval = new TextView(this);
-				TextView actualval = new TextView(this);
+
+				newRow = new TableRow(this);
+				name = new TextView(this);
+				expectedval = new TextView(this);
+				actualval = new TextView(this);
 
 
 				name.setText(outcomeArrayList.get(i).getOutcomeName());
@@ -150,7 +192,7 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 						0,
 						TableRow.LayoutParams.MATCH_PARENT,
 						0.25f));
-				actualval.setText(outcomeArrayList.get(i).getActualVal());
+				actualval.setText(Integer.toString(outcomeArrayList.get(i).getActualVal()));
 				actualval.setTextColor(getColor(R.color.black));
 				// The specified child already has a parent. You must call removeView() on the child's parent first.
 				newRow.addView(actualval);
@@ -184,7 +226,7 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 						0,
 						TableRow.LayoutParams.MATCH_PARENT,
 						0.3f));
-//			expectedval.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+//				expectedval.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 				expectedval.setTextColor(getColor(R.color.black));
 				newRow.addView(expectedval);
 
@@ -201,12 +243,52 @@ public class ViewIndivProgActivity extends AppCompatActivity {
 		binding.tlResources.removeViews(1, binding.tlResources.getChildCount() - 1);
 
 		if(feedback != null){
+			binding.tlResources.removeView(binding.tlResources.getChildAt(0));
+			TableRow newRow = new TableRow(this);
+			TextView name = new TextView(this);
+			TextView expectedval = new TextView(this);
+			TextView actualval = new TextView(this);
+
+			name.setText(" Resource Name");
+			name.setBackground(getDrawable(R.drawable.border));
+			name.setLayoutParams(new TableRow.LayoutParams(
+					0,
+					TableRow.LayoutParams.MATCH_PARENT,
+					0.5f));
+			//			name.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+			name.setTextColor(getColor(R.color.black));
+			name.setTypeface(null, Typeface.BOLD);
+			newRow.addView(name);
+
+			expectedval.setText("Expected Value");
+			expectedval.setBackground(getDrawable(R.drawable.border));
+			expectedval.setLayoutParams(new TableRow.LayoutParams(
+					0,
+					TableRow.LayoutParams.MATCH_PARENT,
+					0.25f));
+			//expectedval.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+			expectedval.setTextColor(getColor(R.color.black));
+			expectedval.setTypeface(null, Typeface.BOLD);
+			newRow.addView(expectedval);
+
+			actualval.setBackground(getDrawable(R.drawable.border));
+			actualval.setLayoutParams(new TableRow.LayoutParams(
+					0,
+					TableRow.LayoutParams.MATCH_PARENT,
+					0.25f));
+			actualval.setText("Actual Value");
+			actualval.setTextColor(getColor(R.color.black));
+			actualval.setTypeface(null, Typeface.BOLD);
+			newRow.addView(actualval);
+
+			binding.tlResources.addView(newRow);
+
 			while (i < resourceArrayList.size())
 			{
-				TableRow newRow = new TableRow(this);
-				TextView name = new TextView(this);
-				TextView expectedval = new TextView(this);
-				TextView actualval = new TextView(this);
+				newRow = new TableRow(this);
+				name = new TextView(this);
+				expectedval = new TextView(this);
+				actualval = new TextView(this);
 
 				name.setText(resourceArrayList.get(i).getResourceName());
 				name.setBackground(getDrawable(R.drawable.border));

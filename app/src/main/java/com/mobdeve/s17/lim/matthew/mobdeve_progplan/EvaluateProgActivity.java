@@ -110,6 +110,7 @@ public class EvaluateProgActivity extends AppCompatActivity {
 
 		while (i < outcomeArrayList.size())
 		{
+
 			TableRow newRow = new TableRow(this);
 			TextView name = new TextView(this);
 			TextView expectedval = new TextView(this);
