@@ -32,46 +32,50 @@
 			android:value="@string/google_maps_key" />
 
 		<activity
+			android:name=".MapsActivity"
+			android:exported="true"
+			android:label="@string/title_activity_maps" />
+		<activity
 			android:name=".ViewIndivProgActivity"
 			android:label="View Program"
-			android:screenOrientation="portrait"/>
+			android:screenOrientation="portrait" />
 		<activity
 			android:name=".UpdateProgActivity"
 			android:label="Update Program Checklist"
-			android:screenOrientation="portrait"/>
+			android:screenOrientation="portrait" />
 		<activity
 			android:name=".EditProgActivity"
 			android:label="Edit Program"
-			android:screenOrientation="portrait"/>
+			android:screenOrientation="portrait" />
 		<activity
 			android:name=".ViewProgsActivity"
 			android:label="View Programs"
-			android:theme="@style/Theme.Mobdeveprogplan.WithActionBar"
-			android:screenOrientation="portrait">
-		</activity>
+			android:screenOrientation="portrait"
+			android:theme="@style/Theme.Mobdeveprogplan.WithActionBar"></activity>
 		<activity
 			android:name=".EvaluateProgActivity"
 			android:label="Evaluate Program"
-			android:screenOrientation="portrait"/>
+			android:screenOrientation="portrait" />
 		<activity
 			android:name=".CreateProgActivity"
 			android:label="Create Program"
-			android:screenOrientation="portrait"/>
+			android:screenOrientation="portrait" />
 		<activity
 			android:name=".UserRegActivity"
-			android:theme="@style/Theme.Mobdeveprogplan.NoActionBar"
-			android:screenOrientation="portrait"/>
+			android:screenOrientation="portrait"
+			android:theme="@style/Theme.Mobdeveprogplan.NoActionBar" />
 		<activity
 			android:name=".MainActivity"
-			android:theme="@style/Theme.Mobdeveprogplan.NoActionBar"
-			android:screenOrientation="portrait">
+			android:screenOrientation="portrait"
+			android:theme="@style/Theme.Mobdeveprogplan.NoActionBar">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<service android:name=".MusicService"></service>
+
+		<service android:name=".MusicService" />
 	</application>
 
 </manifest>

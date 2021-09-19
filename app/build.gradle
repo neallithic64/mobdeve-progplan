@@ -47,11 +47,14 @@ dependencies {
 
 	// Maps API
 	implementation 'com.google.android.gms:play-services-maps:17.0.0'
+	implementation 'com.google.android.gms:play-services-location:15.0.1'
 	implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
 	implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 	implementation 'androidx.navigation:navigation-fragment:2.3.5'
 	implementation 'androidx.navigation:navigation-ui:2.3.5'
 	implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+	implementation 'com.google.api-client:google-api-client:1.23.0'
+
 
 	implementation 'com.github.blackfizz:eazegraph:1.2.2@aar'
 	implementation 'com.nineoldandroids:library:2.4.0'
